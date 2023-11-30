@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\Admin\MainAdminController;
 use App\Http\Controllers\Admin\ProductTypeController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\MainController;
 
 /*
@@ -44,7 +45,17 @@ Route::middleware(['auth'])->group(function() {
             Route::get('edit/{producttype}', [ProductTypeController::class, 'edit']);
             Route::post('edit/{producttype}', [ProductTypeController::class, 'update']);
             Route::DELETE('destroy', [ProductTypeController::class, 'destroy']);
-            // Route::get('logout', [ProductTypeController::class, 'logout']);
+        });
+
+        #product
+        Route::prefix('products')->group(function() {
+            Route::get('add', [ProductController::class, 'create']);
+            Route::post('add', [ProductController::class, 'store']);
+            Route::get('list', [ProductController::class, 'list']);
+            Route::get('edit/{producttype}', [ProductController::class, 'edit']);
+            Route::post('edit/{producttype}', [ProductController::class, 'update']);
+            Route::DELETE('destroy', [ProductController::class, 'destroy']);
+            Route::get('add', [ProductController::class, 'create']);
         });
     });
 });

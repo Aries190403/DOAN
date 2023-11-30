@@ -1,8 +1,5 @@
 @extends('admin.main')
 
-@section('head')
-    {{-- <script src="/ckeditor/ckeditor.js"></script> --}}
-@endsection
 
 @section('content')
     <form action="" method="POST">
@@ -10,38 +7,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Name Product</label>
-                        <input type="text" name="name" value="{{ $product->name }}" class="form-control"
-                               placeholder="Nhập tên sản phẩm">
+                        <label for="menu">Product Name</label>
+                        <input type="text" name="name" value="{{ $product->name }}" class="form-control"  placeholder="Enter Product Name">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Category</label>
-                        <select class="form-control" name="menu_id">
-                            @foreach($menus as $menu)
-                                <option value="{{ $menu->id }}" {{ $product->menu_id == $menu->id ? 'selected' : '' }}>
-                                    {{ $menu->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="menu">Price</label>
-                        <input type="number" name="price" value="{{ $product->price }}"  class="form-control" >
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="menu">Price sale</label>
-                        <input type="number" name="price_sale" value="{{ $product->price_sale }}"  class="form-control" >
+                        <label for="menu">SKU</label>
+                        <input type="text" name="SKU" value="{{ $product->SKU }}" class="form-control"  placeholder="SKU">
                     </div>
                 </div>
             </div>
@@ -51,47 +25,56 @@
                 <textarea name="description" class="form-control">{{ $product->description }}</textarea>
             </div>
 
-            <div class="form-group">
-                <label>Content</label>
-                <textarea name="content" id="content" class="form-control">{{ $product->content }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="menu">Product Image</label>
-                <input type="file"  class="form-control" id="upload">
-                <div id="image_show">
-                    <a href="{{ $product->file }}" target="_blank">
-                        <img src="{{ $product->file }}" width="100px">
-                    </a>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Price</label>
+                        <input type="number" name="price" value="{{ $product->price }}"  class="form-control" placeholder="Enter Product Price">
+                    </div>
                 </div>
-                <input type="hidden" name="file" value="{{ $product->file }}" id="file">
-            </div>
 
-            <div class="form-group">
-                <label>Active</label>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value="1" type="radio" id="active" name="active"
-                        {{ $product->active == 1 ? ' checked=""' : '' }}>
-                    <label for="active" class="custom-control-label">Có</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value="0" type="radio" id="no_active" name="active"
-                        {{ $product->active == 0 ? ' checked=""' : '' }}>
-                    <label for="no_active" class="custom-control-label">Không</label>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Stock</label>
+                        <input type="number" name="stock" value="{{ $product->stock }}"  class="form-control" placeholder="Enter Product Stock">
+                    </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Image Product</label>
+                        <input type="image"  class="form-control" id="upload">
+                        <div id="image_show"></div>
+                        <input type="hidden" name="image" id="image">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Ebook Link</label>
+                        <input type="text" name="ebook_link" value="{{ $product->ebook_link }}"  class="form-control" placeholder="Enter Product Ebook link">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Product Type</label>
+                    <select class="form-control" name="product_type_id">
+                        @foreach($producttypes as $producttype)
+                            <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Update Product</button>
+            <button type="submit" class="btn btn-primary">Add Product</button>
         </div>
         @csrf
     </form>
 @endsection
 
-@section('footer')
-    {{-- <script>
-        CKEDITOR.replace('content');
-    </script> --}}
-@endsection

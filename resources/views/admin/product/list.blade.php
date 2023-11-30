@@ -6,13 +6,18 @@
         <thead>;
             <tr>
                 <th>ID</th>
+                <th>SKU</th>
                 <th>Product Name</th>
-                <th>Category</th>
+                <th>Description</th>
                 <th>Price</th>
-                <th>Price Sale</th>
+                <th>Stock</th>
                 <th>Image</th>
-                <th>Active</th>
-                <th>Update</th>
+                <th>Ebook link</th>
+                <th>Product Type</th>
+                <th>Create at</th>
+                <th>Update at</th>
+                <th>Status</th>
+                <th>Delete at</th>
                 <th style="width: 100px">Tools</th>
             </tr>
         </thead>
@@ -20,12 +25,23 @@
             @foreach($products as $key => $product)
             <tr>
                 <td>{{ $product->id }}</td>
+                <td>{{ $product->SKU }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->menu->name }}</td>
+                <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
-                <td>{{ $product->price_sale }}</td>
-                <td><img src="{{ $product->file }}" alt="Product Image" style="max-width: 50px; max-height: 50px;"></td>
-                <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
+                <td>{{ $product->stock }}</td>
+                <td><img src="{{ $product->image }}" alt="Product Image" style="max-width: 50px; max-height: 50px;"></td>
+                <td>{{ $product->ebook_link }}</td>
+                <td>{{ $product->producttype->name }}</td>
+                <td>{{ $product->created_at }}</td>
+                <td>{{ $product->updated_at }}</td>
+                <td>
+                    @unless ($product->deleted_at)
+                        <span class="btn btn-success btn-xs">AVAILABLE</span>
+                    @else
+                        <span class="btn btn-danger btn-xs">DELETED</span>
+                    @endunless
+                </td>
                 <td>{{ $product->updated_at }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{ $product->id }}">

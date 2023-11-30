@@ -19,7 +19,7 @@ class ProductTypeController extends Controller
     public function create()
     {
         return view('admin.producttype.add',[
-            'title' => 'Add Product Type'
+            'title' => 'Add Product Type' //name
         ]);
     }
 
@@ -38,7 +38,7 @@ class ProductTypeController extends Controller
         return redirect()->back();
     }
 
-    public function list()
+    public function list(ProductType $producttype)
     {
         $producttype = ProductType::withTrashed()->orderByDesc('id')->paginate(20);
 
@@ -51,7 +51,7 @@ class ProductTypeController extends Controller
     public function edit(ProductType $producttype)
     {
         return view('admin.producttype.edit', [
-            'title' => 'Edit Product Type',
+            'title' => 'Edit Product Type' . $producttype->name,
             'producttype' => $producttype
         ]);
     }

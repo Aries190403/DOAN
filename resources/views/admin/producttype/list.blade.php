@@ -22,7 +22,7 @@
                 <td>{{ $producttype->updated_at }}</td>
                 <td>
                     @unless ($producttype->deleted_at)
-                        <span class="btn btn-success btn-xs">No</span>
+                        <span class="btn btn-success btn-xs">AVAILABLE</span>
                     @else
                         <span class="btn btn-danger btn-xs">DELETED</span>
                     @endunless
