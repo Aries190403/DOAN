@@ -3330,3 +3330,10 @@ input.num-product::-webkit-inner-spin-button {
   }
 
 }
+
+#btn-addToCart{
+  background-color: green;
+    color: white;
+    padding: 4px;
+    margin-top: 10px;
+}

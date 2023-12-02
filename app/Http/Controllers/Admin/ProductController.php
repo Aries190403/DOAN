@@ -10,17 +10,17 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function index()
     {
-
     }
 
     public function create()
     {
-        return view('admin.product.add',[
+        return view('admin.product.add', [
             'title' => 'Add Product ',
             'producttypes' => ProductType::where('deleted_at', NULL)->get()
         ]);
@@ -28,13 +28,12 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        try{
+        try {
             $request->except('_token');
             Product::create($request->all());
 
             Session::flash('success', 'Complete Add Product');
-        } catch(\Exception $err)
-        {
+        } catch (\Exception $err) {
             Session::flash('error', $err->getMessage());
             return redirect()->back()->withInput();
         }

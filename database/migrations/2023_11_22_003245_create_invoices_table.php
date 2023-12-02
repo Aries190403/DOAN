@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->decimal('total', 10, 2);
-            $table->enum('status', ['Pending', 'Paid', 'Canceled'])->default('Pending');
+            $table->enum('status', ['Pending', 'Transpoted', 'Paid', 'Canceled'])->default('Pending');
             $table->timestamps();
             $table->softDeletes();
         });
