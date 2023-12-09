@@ -99,7 +99,7 @@
                             <h6">{{ strlen($p->name) > 20 ? substr($p->name, 0, 20).'...' : $p->name }}</h6>
                                 <br>
                                 <p style="color: red; float: left;">{{ number_format($p->price, 0, ',', ',') }} đ</p><br>
-                                <a id="btn-addToCart" href="#">Thêm vào giỏ hàng</a>
+                                <a id="btn-addToCart" href="{{ route('cart') }}">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>

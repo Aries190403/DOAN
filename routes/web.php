@@ -5,10 +5,13 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\LoginController;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\MainAdminController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\prodtestController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +28,14 @@ use App\Http\Controllers\MainController;
 //     return view('welcome');
 // });
 
+Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/store', [LoginController::class, 'store']);
+
+Route::get('/register', [RegisterController::class, 'showregister'])->name('register');
+Route::post('/register', [RegisterController::class, 'postregister'])->name('register');
 
 Route::get('/', [MainController::class, 'index'])->name('home');
 
@@ -58,4 +66,5 @@ Route::middleware(['auth'])->group(function() {
             Route::get('add', [ProductController::class, 'create']);
         });
     });
+    Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 });

@@ -35,6 +35,23 @@
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
+                    {{-- sử lý nút login, log out, --}}
+                    @guest
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person @if(Request::is('login*')) active @endif">
+                        <a class="nav-link" href="/login">
+                            <i class="zmdi zmdi-account"></i> <!-- Đây là biểu tượng đăng nhập của Font Awesome -->
+                        </a>
+                    </div>
+                    @endguest
+                    @auth
+                    <a class="nav-item">Hello {{ Auth::user()->fullName }}</a>
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <input type="submit" value="Logout" class="nav-link">
+                    </form>
+                    @endauth
+                    {{-- end code --}}
+
                 </div>
             </nav>
         </div>
