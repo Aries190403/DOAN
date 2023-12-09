@@ -3,28 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
     protected function fixImage(Product $p)
     {
-        if ($p->image && Storage::disk('public')->exists($p->image)) {
-            $p->image = Storage::url($p->image);
-        } else {
-            $p->image = '/image/No-Image-Placeholder.svg (1).png';
+        // Lấy tất cả các hình ảnh từ bảng product_images dựa trên $p->id
+        $images = ProductImage::where('product_id', $p->id)->pluck('image_path')->toArray();
+
+        $imageUrls = [];
+
+        foreach ($images as $image) {
+            $fullImagePath = public_path("storage/upload/product/{$image}");
+
+            if (file_exists($fullImagePath)) {
+                $imageUrls[] = asset("storage/upload/product/{$image}");
+                // var_dump($imageUrls);
+            } else {
+                $imageUrls[] = asset("image/No-Image-Placeholder.svg (1).png");
+            }
         }
+
+        $p->image = $imageUrls;
     }
+
+
+
 
     public function index()
     {
+        $productType = ProductType::all();
         $lst = Product::all();
         foreach ($lst as $p) {
             $this->fixImage($p);
         }
         return view('home', [
-            'title' => 'Home', 'lst' => $lst
+            'title' => 'Home', 'lst' => $lst, 'productType' => $productType
         ]);
+    }
+
+    public function show(Request $request, Product $product)
+    {
+        $this->fixImage($product);
+        if ($request->expectsJson()) {
+            return $product;
+        }
+        return view('product-show', ['title' => 'Product', 'p' => $product]);
     }
 }

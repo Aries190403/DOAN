@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,15 +39,16 @@ Route::get('/register', [RegisterController::class, 'showregister'])->name('regi
 Route::post('/register', [RegisterController::class, 'postregister'])->name('register');
 
 Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/products/{product}', [MainController::class, 'show'])->name('product-show');
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
 
-    Route::prefix('admin')->group(function() {
+    Route::prefix('admin')->group(function () {
         Route::get('/', [MainAdminController::class, 'index'])->name('admin');
         // Route::get('main', [MainController::class, 'index']);
 
         #product type
-        Route::prefix('producttypes')->group(function() {
+        Route::prefix('producttypes')->group(function () {
             Route::get('add', [ProductTypeController::class, 'create']);
             Route::post('add', [ProductTypeController::class, 'store']);
             Route::get('list', [ProductTypeController::class, 'list']);
@@ -56,7 +58,7 @@ Route::middleware(['auth'])->group(function() {
         });
 
         #product
-        Route::prefix('products')->group(function() {
+        Route::prefix('products')->group(function () {
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
             Route::get('list', [ProductController::class, 'list']);
@@ -66,5 +68,5 @@ Route::middleware(['auth'])->group(function() {
             Route::get('add', [ProductController::class, 'create']);
         });
     });
-    Route::post('/logout',[LoginController::class,'logout'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
