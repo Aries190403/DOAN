@@ -63,7 +63,7 @@
                     <h4>{{ strlen($p->name) > 25 ? substr($p->name, 0, 25).'..' : $p->name }}</h4>
                     <p>{{ number_format($p->price, 0, ',', ',') }} đ</p><br>
                 </a><br>
-                <a id="btn-addToCart" href="#">Thêm vào giỏ hàng</a>
+                <a id="btn-addToCart" href="{{ route('cart') }}">Thêm vào giỏ hàng</a>
             </div>
             @endforeach
         </div>
