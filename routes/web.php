@@ -29,6 +29,10 @@ use App\Models\Product;
 //     return view('welcome');
 // });
 
+
+
+Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart/add');
+Route::get('/cart/detete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart/delete');
 Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
 
 

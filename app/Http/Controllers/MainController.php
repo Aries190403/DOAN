@@ -7,6 +7,13 @@ use App\Models\ProductImage;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 
+
+use App\Models\Cart;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use DB;
+
 class MainController extends Controller
 {
     protected function fixImage(Product $p)
@@ -33,6 +40,17 @@ class MainController extends Controller
 
 
 
+    // public function index()
+    // {
+    //     $productType = ProductType::all();
+    //     $lst = Product::all();
+    //     foreach ($lst as $p) {
+    //         $this->fixImage($p);
+    //     }
+    //     return view('home', [
+    //         'title' => 'Home', 'lst' => $lst, 'productType' => $productType
+    //     ]);
+    // }
     public function index()
     {
         $productType = ProductType::all();
@@ -40,10 +58,34 @@ class MainController extends Controller
         foreach ($lst as $p) {
             $this->fixImage($p);
         }
-        return view('home', [
-            'title' => 'Home', 'lst' => $lst, 'productType' => $productType
-        ]);
+
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+
+            $cartProducts = DB::table('carts')
+                ->join('products', 'carts.product_id', '=', 'products.id')
+                ->select(
+                    'products.name',
+                    'products.price',
+                    'carts.quantity',
+                    'products.id',
+                    DB::raw('(SELECT image_path FROM product_images WHERE product_images.product_id = products.id LIMIT 1) AS image_path')
+                )
+                ->where('carts.user_id', $userId)
+                ->get();
+
+            Session::put('cart', $cartProducts);
+            // dd(Session::get('cart'));
+            return view('home', [
+                'title' => 'Home', 'lst' => $lst, 'productType' => $productType, 'cartProducts' => $cartProducts
+            ]);
+        } else {
+            return view('home', [
+                'title' => 'Home', 'lst' => $lst, 'productType' => $productType
+            ]);
+        }
     }
+
 
     public function show(Request $request, Product $product)
     {
@@ -52,5 +94,10 @@ class MainController extends Controller
             return $product;
         }
         return view('product-show', ['title' => 'Product', 'p' => $product]);
+    }
+    public function showCart()
+    {
+            $cartProducts="";
+            return view('header', ['cartProducts' => $cartProducts]);
     }
 }
