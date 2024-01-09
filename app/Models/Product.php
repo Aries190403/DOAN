@@ -12,7 +12,6 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'id',
         'SKU',
         'name',
         'description',
@@ -20,11 +19,23 @@ class Product extends Model
         'stock',
         'image',
         'ebook_link',
-        'product_type_id'
+        'avatar',
+        'product_type_id',
+        'status'
     ];
 
     public function producttype()
     {
         return $this->belongsTo(ProductType::class, 'product_type_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($product) {
+            $product->status = 0;
+            $product->save();
+        });
     }
 }

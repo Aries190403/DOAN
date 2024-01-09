@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductType;
+use App\Models\SlideShow;
 use Illuminate\Http\Request;
 
 
@@ -12,7 +13,7 @@ use App\Models\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
@@ -54,7 +55,8 @@ class MainController extends Controller
     public function index()
     {
         $productType = ProductType::all();
-        $lst = Product::all();
+        //$lst = Product::all();
+        $lst = Product::paginate(20);
         foreach ($lst as $p) {
             $this->fixImage($p);
         }
@@ -77,11 +79,15 @@ class MainController extends Controller
             Session::put('cart', $cartProducts);
             // dd(Session::get('cart'));
             return view('home', [
-                'title' => 'Home', 'lst' => $lst, 'productType' => $productType, 'cartProducts' => $cartProducts
+                'title' => 'Home', 'lst' => $lst, 'productType' => $productType, 'cartProducts' => $cartProducts,
+                'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
+                'slideshows' => SlideShow::where('status', 1)->get()
             ]);
         } else {
             return view('home', [
-                'title' => 'Home', 'lst' => $lst, 'productType' => $productType
+                'title' => 'Home', 'lst' => $lst, 'productType' => $productType,
+                'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
+                'slideshows' => SlideShow::where('status', 1)->get()
             ]);
         }
     }
@@ -97,7 +103,7 @@ class MainController extends Controller
     }
     public function showCart()
     {
-            $cartProducts="";
-            return view('header', ['cartProducts' => $cartProducts]);
+        $cartProducts = "";
+        return view('header', ['cartProducts' => $cartProducts]);
     }
 }

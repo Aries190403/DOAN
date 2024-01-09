@@ -1,5 +1,5 @@
 <header>
-    {{-- @php $menusHtml = \App\Helpers\Helper::menus($menus); @endphp --}}
+    @php $producttypesHtml = \App\Helpers\Helper::producttypes($producttypes); @endphp
     <!-- Header desktop -->
     <div class="container-menu-desktop">
 
@@ -16,7 +16,7 @@
                     <ul class="main-menu">
                         <li class="active-menu"><a href="/">Home</a> </li>
 
-                        {{-- {!! $menusHtml !!} --}}
+                        {!! $producttypesHtml !!}
 
                         <li>
                             <a href="contact.html">Contact</a>
@@ -29,7 +29,7 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                         <i class="zmdi zmdi-search"></i>
                     </div>
-                    
+
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
                         data-notify="{{ !is_null(session('cart')) ? count(session('cart')) : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>

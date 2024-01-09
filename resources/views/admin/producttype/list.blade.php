@@ -21,11 +21,16 @@
                 <td>{{ $producttype->created_at }}</td>
                 <td>{{ $producttype->updated_at }}</td>
                 <td>
-                    @unless ($producttype->deleted_at)
+                    @if ($producttype->status == 1)
                         <span class="btn btn-success btn-xs">AVAILABLE</span>
                     @else
                         <span class="btn btn-danger btn-xs">DELETED</span>
-                    @endunless
+                    @endif
+                    {{-- @unless ($producttype->deleted_at)
+                        <span class="btn btn-success btn-xs">AVAILABLE</span>
+                    @else
+                        <span class="btn btn-danger btn-xs">DELETED</span>
+                    @endunless --}}
                 </td>
                 <td>{{ $producttype->deleted_at }}</td>
                 <td>

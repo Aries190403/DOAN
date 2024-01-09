@@ -3441,6 +3441,38 @@ font-size: 20px;
   align-items: center;
 }
 
-#showproduct #buyNow{
+#showproduct #buyNow,.addcart{
+margin: 188px 0 0 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
+}
+
+.cmt{
+  margin-left: 40px;
+}
+
+.cmt form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 368px;
+}
+
+.cmt input {
+  border: 1px solid black;
+  border-radius: 1cm;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.cmt button {
+  background-color: grey;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
   float: right;
+  border-radius: 10px;
 }

@@ -10,17 +10,42 @@
 
 
 <div id="showproduct" class="row">
-    <div class="col-md-4 image-carousel mr-2">
-        @foreach($p->image as $image)
-        <img id="img" src="{{$image}}" alt="image" />
-        @endforeach
+    <div class="col-md-4 image-carousel">
+        <div>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class=" carousel-indicators">
+                    @foreach($p->image as $key => $image)
+                    <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
+                    @endforeach
+                </ul>
+
+                <!-- The slideshow -->
+                <div>
+                    @foreach($p->image as $key => $image)
+                    <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
+                        <img src="{{$image}}" alt="image" width="450" height="450" />
+                    </div>
+                    @endforeach
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-4 desc">
         <div class="h2 col-xs-b25" style="-webkit-text-stroke: thin;">{{$p->name}}</div>
+        <br>
         <div class="row col-xs-b25">
             <div class="col-sm-6">
-                <div class="simple-article size-5 grey">PRICE: <span class="color">{{number_format($p->price, 0, ',', ',')}} đ</span></div>
+                <div class="h4 simple-article size-5 grey">PRICE: <span class="color">{{number_format($p->price, 0, ',', ',')}} đ</span></div>
             </div>
             <div class="col-sm-6 col-sm-text-right">
                 <div class="rate-wrapper align-inline">
@@ -34,46 +59,52 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <div class="simple-article size-3 col-xs-b5">ITEM NO.: <span class="grey">{{$p->SKU}}</span></div>
+                <div class="simple-article size-3 col-xs-b5">ITEM NO. : <span class="grey">{{$p->SKU}}</span></div>
             </div>
             <div class="col-sm-6 col-sm-text-right">
                 <div class="simple-article size-3 col-xs-b20"><span class="grey"></span></div>
             </div>
         </div>
-        <div class="simple-article size-3 col-xs-b30">{{$p->description}}</div>
+        <br>
         <div class="row col-xs-b40">
             <div class="col-sm-3">
                 <div class="h6 detail-data-title size-1">Quantity: {{$p->stock}}</div>
             </div>
         </div>
+        <div class="simple-article size-3 col-xs-b30">{{$p->description}}</div>
+
         <div class="row m5 col-xs-b40">
-            <div class="col-sm-6 col-xs-b10 col-sm-b0">
+            <div class="col-md5">
+
+            </div>
+            <div class="">
                 <a class="button size-2 style-2 block" href="#">
                     <span class="button-wrapper">
-                        <span class="icon"><img src="img/icon-2.png" alt=""></span>
-                        <span class="text"><i class="zmdi zmdi-shopping-cart"></i> Add to cart</span>
+                        <span class="btn btn-success addcart"><i class="zmdi zmdi-shopping-cart"></i>Add to cart</span>
+                    </span>
+                </a>
+                <a class="button size-2 style-2 block" href="#">
+                    <span class="button-wrapper">
+                        <button class="btn btn-danger" type="button" id="buyNow">Buy</button>
                     </span>
                 </a>
             </div>
-
         </div>
-        <button class="btn btn-danger" type="button" id="buyNow">Buy</button>
     </div>
 
-    <div class="col-md-4 cmt" style="margin-top: auto;">
+    <div class="col-md4 cmt">
         <div>
-            <span>Comment </span>
+            <h5>Comment </h5>
             <form action="#" method="post">
 
-                <input type="text" placeholder="your comment">
-                <button type="button" value="">Send</button>
+                <input type="text" name="comment" placeholder="Your comment">
+                <button type="submit">Send</button>
             </form>
         </div>
     </div>
 </div>
 
 
-</div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
