@@ -99,7 +99,11 @@ class MainController extends Controller
         if ($request->expectsJson()) {
             return $product;
         }
-        return view('product-show', ['title' => 'Product', 'p' => $product]);
+        return view('product-show', [
+            'title' => 'Product', 'p' => $product,
+            'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
+            'slideshows' => SlideShow::where('status', 1)->get()
+        ]);
     }
     public function showCart()
     {

@@ -30,8 +30,7 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                        data-notify="{{ !is_null(session('cart')) ? count(session('cart')) : 0 }}">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(session('cart')) ? count(session('cart')) : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
@@ -78,9 +77,9 @@
 
         <!-- Button show menu -->
         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
         </div>
     </div>
 

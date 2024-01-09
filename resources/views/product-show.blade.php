@@ -1,6 +1,41 @@
 @extends('main')
 
 @section('content')
+
+<section class="section-slide">
+    <div class="wrap-slick1">
+        <div class="slick1">
+
+            @foreach($slideshows as $slideshow)
+
+            <div class="item-slick1" style="background-image: url({{ $slideshow->image_slide }});">
+                <div class="container h-full">
+                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+                        <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+                            <span class="ltext-101 cl2 respon2">
+                                HOT 2023
+                            </span>
+                        </div>
+
+                        <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+                                {{ $slideshow->name }}
+                            </h2>
+                        </div>
+
+                        <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+                            <a href="{{ $slideshow->url }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                Shop Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 <div class="sec-banner bg0 p-t-80 p-b-50">
     <div class="container">
         <div class="row">
@@ -24,7 +59,7 @@
                 <div>
                     @foreach($p->image as $key => $image)
                     <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
-                        <img src="{{$image}}" alt="image" width="450" height="450" />
+                        <img src="{{$image}}" alt="image" width="450" height="450" style="border-radius: 10px;" />
                     </div>
                     @endforeach
                 </div>
@@ -75,19 +110,23 @@
 
         <div class="row m5 col-xs-b40">
             <div class="col-md5">
-
             </div>
-            <div class="">
-                <a class="button size-2 style-2 block" href="#">
-                    <span class="button-wrapper">
-                        <span class="btn btn-success addcart"><i class="zmdi zmdi-shopping-cart"></i>Add to cart</span>
-                    </span>
-                </a>
-                <a class="button size-2 style-2 block" href="#">
-                    <span class="button-wrapper">
-                        <button class="btn btn-danger" type="button" id="buyNow">Buy</button>
-                    </span>
-                </a>
+            <div class="submitform">
+                <div class="">
+                    <form action="{{ route('cart/add', ['product_id' => $p->id]) }}" method="GET">
+                        <button type="submit" class="addtocart">
+                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                        </button>
+                    </form>
+                </div>
+                <div class="">
+                    <form action="#" method="GET">
+                        <button type="submit" class="buynow">
+                            Buy Now
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
@@ -97,7 +136,7 @@
             <h5>Comment </h5>
             <form action="#" method="post">
 
-                <input type="text" name="comment" placeholder="Your comment">
+                <input type="text" name="comment" placeholder="Your comment" required="">
                 <button type="submit">Send</button>
             </form>
         </div>
