@@ -12,6 +12,17 @@ class ProductType extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name',
+        'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($producttype) {
+            $producttype->status = 0;
+            $producttype->save();
+        });
+    }
 }

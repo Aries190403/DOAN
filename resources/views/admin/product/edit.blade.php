@@ -44,10 +44,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Image Product</label>
-                        <input type="image"  class="form-control" id="upload">
-                        <div id="image_show"></div>
-                        <input type="hidden" name="image" id="image">
+                        <label for="menu">Product Image</label>
+                        <input type="file"  class="form-control" id="upload">
+                        <div id="image_show">
+                            <a href="{{ $product->image }}" target="_blank">
+                                <img src="{{ $product->image }}" width="100px">
+                            </a>
+                        </div>
+                        <input type="hidden" name="image" value="{{ $product->image }}" id="file">
                     </div>
                 </div>
 
@@ -69,10 +73,24 @@
                     </select>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <label>Status</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" value="1" type="radio" id="status_avaliable" name="status"
+                        {{ $product->status == 1 ? ' checked = ""' : ''}}>
+                    <label for="status_avaliable" class="custom-control-label">Online</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" value="0" type="radio" id="status_deleted" name="status"
+                    {{ $product->status == 0 ? ' checked = ""' : ''}}>
+                    <label for="status_deleted" class="custom-control-label">Offline</label>
+                </div>
+            </div>
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Add Product</button>
+            <button type="submit" class="btn btn-primary">Edit Product</button>
         </div>
         @csrf
     </form>

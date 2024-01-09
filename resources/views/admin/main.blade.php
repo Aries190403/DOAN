@@ -65,12 +65,12 @@
         </div>
       </div>
   </div>
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Tandat</b>
     </div>
     <strong>Copyright &copy; 2023 <a href="https://adminlte.io">TanDat</a>.</strong> All rights reserved.
-  </footer>
+  </footer> --}}
     <aside class="control-sidebar control-sidebar-dark">
   </aside>
 </div>

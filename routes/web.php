@@ -9,9 +9,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\MainAdminController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideShowController;
+use App\Http\Controllers\Admin\UploadController;
+
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
+
 use App\Models\Product;
 
 /*
@@ -66,11 +70,24 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
             Route::get('list', [ProductController::class, 'list']);
-            Route::get('edit/{producttype}', [ProductController::class, 'edit']);
-            Route::post('edit/{producttype}', [ProductController::class, 'update']);
+            Route::get('edit/{product}', [ProductController::class, 'edit']);
+            Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
             Route::get('add', [ProductController::class, 'create']);
         });
+
+        #slide show
+        Route::prefix('slideshows')->group(function() {
+            Route::get('add', [SlideShowController::class, 'create']);
+            Route::post('add', [SlideShowController::class, 'store']);
+            Route::get('list', [SlideShowController::class, 'list']);
+            Route::get('edit/{slideshow}', [SlideShowController::class, 'edit']);
+            Route::post('edit/{slideshow}', [SlideShowController::class, 'update']);
+            Route::DELETE('destroy', [SlideShowController::class, 'destroy']);
+        });
+
+        #upload image
+        Route::post('upload/services', [UploadController::class, 'store']);
     });
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

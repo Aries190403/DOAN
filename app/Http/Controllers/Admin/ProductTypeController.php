@@ -51,7 +51,7 @@ class ProductTypeController extends Controller
     public function edit(ProductType $producttype)
     {
         return view('admin.producttype.edit', [
-            'title' => 'Edit Product Type' . $producttype->name,
+            'title' => 'Edit Product Type: ' . $producttype->name,
             'producttype' => $producttype
         ]);
     }
@@ -59,6 +59,7 @@ class ProductTypeController extends Controller
     public function update(ProductType $producttype, UpdateProductTypeRequest $request)
     {
         $producttype->name = (string)$request->input('name');
+        $producttype->status = (string)$request->input('status');
         $producttype->save();
 
         Session::flash('success', 'Edit Product Type Complete');

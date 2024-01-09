@@ -3,46 +3,43 @@
 
 @section('content')
     <table class="table">
-        <thead>;
+        <thead>
             <tr>
                 <th>ID</th>
+                <th>Image</th>
                 <th>SKU</th>
                 <th>Product Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th>Image</th>
                 <th>Ebook link</th>
                 <th>Product Type</th>
-                <th>Create at</th>
-                <th>Update at</th>
                 <th>Status</th>
-                <th>Delete at</th>
                 <th style="width: 100px">Tools</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $key => $product)
+            @foreach($allProducts as $product)
             <tr>
                 <td>{{ $product->id }}</td>
+                <td class="image-cell"><img src="{{ $product->image }}" alt="Product Image" style="max-width: 50px; max-height: 50px;"></td>
                 <td>{{ $product->SKU }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->stock }}</td>
-                <td><img src="{{ $product->image }}" alt="Product Image" style="max-width: 50px; max-height: 50px;"></td>
                 <td>{{ $product->ebook_link }}</td>
                 <td>{{ $product->producttype->name }}</td>
-                <td>{{ $product->created_at }}</td>
-                <td>{{ $product->updated_at }}</td>
                 <td>
-                    @unless ($product->deleted_at)
-                        <span class="btn btn-success btn-xs">AVAILABLE</span>
+                    @if ($product->stock == 0)
+                        <span class="btn btn-warning btn-xs">HẾT HÀNG</span>
+                    @elseif ($product->status == 1)
+                        <span class="btn btn-success btn-xs">CÒN HÀNG</span>
                     @else
-                        <span class="btn btn-danger btn-xs">DELETED</span>
-                    @endunless
+                        <span class="btn btn-danger btn-xs">ĐÃ XÓA</span>
+                    @endif
                 </td>
-                <td>{{ $product->updated_at }}</td>
+
                 <td>
                     <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{ $product->id }}">
                         <i class="fas fa-edit"></i>
