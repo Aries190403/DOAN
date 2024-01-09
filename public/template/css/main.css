@@ -3346,7 +3346,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .product div{
     padding-bottom: 10px;
-    padding-left: 63px;
+    padding-left: 15px;
 }
 
 .product p{
@@ -3475,4 +3475,8 @@ margin: 188px 0 0 10px;
   cursor: pointer;
   float: right;
   border-radius: 10px;
+}
+
+.wrap-icon-header{
+  display: contents;
 }

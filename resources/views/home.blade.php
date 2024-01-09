@@ -3,39 +3,39 @@
 @section('content')
 
 <!-- Slider --> <!-- slide show ạ -->
-    <section class="section-slide">
-        <div class="wrap-slick1">
-            <div class="slick1">
+<section class="section-slide">
+    <div class="wrap-slick1">
+        <div class="slick1">
 
-                @foreach($slideshows as $slideshow)
+            @foreach($slideshows as $slideshow)
 
-                    <div class="item-slick1" style="background-image: url({{ $slideshow->image_slide }});">
-                        <div class="container h-full">
-                            <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                                <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+            <div class="item-slick1" style="background-image: url({{ $slideshow->image_slide }});">
+                <div class="container h-full">
+                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+                        <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
                             <span class="ltext-101 cl2 respon2">
                                 HOT 2023
                             </span>
-                                </div>
+                        </div>
 
-                                <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                        {{ $slideshow->name }}
-                                    </h2>
-                                </div>
+                        <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+                                {{ $slideshow->name }}
+                            </h2>
+                        </div>
 
-                                <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                    <a href="{{ $slideshow->url }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                        Shop Now
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+                            <a href="{{ $slideshow->url }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                Shop Now
+                            </a>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
+            @endforeach
         </div>
-    </section>
+    </div>
+</section>
 
 <!-- Banner --> <!-- mấy cái producttype ở đây, nếu không thích có thể bỏ -->
 <div class="sec-banner bg0 p-t-80 p-b-50">
@@ -84,35 +84,35 @@
                  @foreach($productType as $type)
                 <label class="filter-label">
                     <input type="checkbox" class="product-type-filter" value="{{ $type->id }}"> {{ $type->name }}
-                </label>
-                @endforeach
-            </div>
+</label>
+@endforeach
+</div>
+</div>
+</div>
+<div id="loadProduct">
+    <div class="row product">
+        @foreach($lst as $p)
+        <div class="col-md-3 boder">
+            <a href="{{route('product-show',['product'=>$p])}}">
+                <img class="productImage" src="{{$p->image[0]}}" alt="Image 1">
+                <h4>{{ strlen($p->name) > 25 ? substr($p->name, 0, 25).'..' : $p->name }}</h4>
+                <p>{{ number_format($p->price, 0, ',', ',') }} đ</p><br>
+            </a><br>
+            <form action="{{ route('cart/add', ['product_id' => $p->id]) }}" method="GET" style="display: inline;">
+                <button type="submit">
+                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                </button>
+            </form>
         </div>
+        @endforeach
     </div>
-    <div id="loadProduct">
-        <div class="row product">
-             @foreach($lst as $p)
-            <div class="col-md-3 boder">
-                <a href="{{route('product-show',['product'=>$p])}}">
-                    <img class="productImage" src="{{$p->image[0]}}" alt="Image 1">
-                    <h4>{{ strlen($p->name) > 25 ? substr($p->name, 0, 25).'..' : $p->name }}</h4>
-                    <p>{{ number_format($p->price, 0, ',', ',') }} đ</p><br>
-                </a><br>
-                <form action="{{ route('cart/add', ['product_id' => $p->id]) }}" method="GET" style="display: inline;">
-                    <button type="submit">
-                        <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
-                    </button>
-                </form>
-            </div>
-            @endforeach
-        </div>
-    </div>
-    <div style="justify-content: center;" class="pagination">
-        {{ $lst->links() }}
-    </div>
+</div>
+<div style="justify-content: center;" class="pagination">
+    {{ $lst->links() }}
+</div>
 
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </section> --}}
 
 <!-- Product -->
@@ -133,7 +133,7 @@
         </div>
 
         <div id="loadProduct">
-            {{-- @include('products.list') --}} <!--load hình ảnh lên tại đây ạ -->
+            @include('products.list') <!--load hình ảnh lên tại đây ạ -->
         </div>
 
 
