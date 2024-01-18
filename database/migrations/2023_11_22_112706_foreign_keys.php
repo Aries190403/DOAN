@@ -43,8 +43,8 @@ return new class extends Migration
         //Khóa ngoại từ bảng giỏ hàng đến user, sản phâmr, combo
         Schema::table('carts', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('product_id')->nullable()->constrained('products');
-            $table->foreignId('combo_id')->nullable()->constrained('combos');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('combo_id')->constrained('combos');
         });
 
         //Khóa ngoại bảng hình ảnh sản phẩm

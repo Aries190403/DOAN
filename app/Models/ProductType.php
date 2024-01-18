@@ -16,6 +16,11 @@ class ProductType extends Model
         'status'
     ];
 
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'product_type_id', 'id');
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -55,13 +55,12 @@
                                 <p>Product Type List</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-store-alt"></i>
+                        <i class="nav-icon fas fa-cube"></i>
                         <p> Product
                             <i class="right fas fa-angle-left"></i>
                         </p>
@@ -79,51 +78,27 @@
                                 <p>Product List</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-user-secret"></i>
-                        <p>  Author
+                        <i class="nav-icon fas fa-image"></i>
+                        <p> Product Image
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/authors/add" class="nav-link">
+                            <a href="/admin/productimages/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add Author</p>
+                                <p>Add Product Image</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/authors/list" class="nav-link">
+                            <a href="/admin/productimages/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Author List</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-images"></i>
-                        <p> Publisher
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/publishers/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Add Publisher</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/publishers/list" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Publisher List</p>
+                                <p>Product Image List</p>
                             </a>
                         </li>
                     </ul>
@@ -154,18 +129,53 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cart-plus"></i>
-                        <p> Cart
+                        <i class="nav-icon fas fa-home"></i>
+                        <p> Home
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/customers" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Cart List</p>
+                                <p>Home</p>
                             </a>
                         </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-comment"></i>
+                        <p> Comment
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/comments/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Comment</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cart-plus"></i>
+                        <p> Oder
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/orders/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Oder List</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
             </ul>

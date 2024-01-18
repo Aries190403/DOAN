@@ -15,18 +15,18 @@
                 </div>
             </div>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="menu">Slide Image</label>
-                        <input type="file"  class="form-control" id="upload">
-                        <div id="image_show">
-                            <a href="{{ $slideshow->image_slide }}" target="_blank">
-                                <img src="{{ $slideshow->image_slide }}" width="100px">
-                            </a>
-                        </div>
-                        <input type="hidden" name="image_slide" value="{{ $slideshow->image_slide }}" id="file">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="menu">Product Image</label>
+                    <input type="file"  class="form-control" id="upload">
+                    <div id="image_show">
+                        <a href="{{ $slideshow->image_slide }}" target="_blank">
+                            <img src="{{ $slideshow->image_slide }}" width="100px">
+                        </a>
                     </div>
+                    <input type="hidden" name="image_slide" value="{{ $slideshow->image_slide }}" id="file">
                 </div>
+            </div>
 
 
             <div class="col-md-6">

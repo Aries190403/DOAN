@@ -7,26 +7,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Slide Name</label>
-                        <input type="text" name="name" value="{{ old('name') }}" class="form-control"  placeholder="Enter Slide Name">
+                        <label for="menu">Image Product</label>
+                            <input type="file"  class="form-control" id="upload">
+                        <div id="image_show">
+
+                        </div>
+                        <input type="hidden" name="image_path" id="file">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">URL</label>
-                        <input type="text" name="url" value="{{ old('url') }}" class="form-control"  placeholder="URl Slide">
+                        <label>Product </label>
+                        <select class="form-control" name="product_id">
+                            @foreach($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="menu">Image Slide Show</label>
-                <input type="file"  class="form-control" id="upload">
-                <div id="image_show">
-
-                </div>
-                <input type="hidden" name="image_slide" id="file">
             </div>
 
             <div class="col-md-6">
@@ -43,7 +42,7 @@
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Add Slide</button>
+            <button type="submit" class="btn btn-primary">Add Product</button>
         </div>
         @csrf
     </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 
@@ -7,10 +8,12 @@ use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\MainAdminController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideShowController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\ProductImageController;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\prodtestController;
@@ -73,7 +76,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'edit']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
-            Route::get('add', [ProductController::class, 'create']);
+        });
+
+        #product image
+        Route::prefix('productimages')->group(function () {
+            Route::get('add', [ProductImageController::class, 'create']);
+            Route::post('add', [ProductImageController::class, 'store']);
+            Route::get('list', [ProductImageController::class, 'list']);
+            Route::get('edit/{productimage}', [ProductImageController::class, 'edit']);
+            Route::post('edit/{productimage}', [ProductImageController::class, 'update']);
+            Route::DELETE('destroy', [ProductImageController::class, 'destroy']);
         });
 
         #slide show
@@ -86,8 +98,25 @@ Route::middleware(['auth'])->group(function () {
             Route::DELETE('destroy', [SlideShowController::class, 'destroy']);
         });
 
+        #comment
+        Route::prefix('comments')->group(function() {
+            Route::get('list', [CommentController::class, 'list']);
+            Route::DELETE('destroy', [CommentController::class, 'destroy']);
+        });
+
+        #oder
+        Route::prefix('orders')->group(function() {
+            Route::get('list', [OrderController::class, 'index']);
+            Route::get('view/{invoices}', [OrderController::class, 'detail']);
+            Route::post('view/{invoices}', [OrderController::class, 'update'])->name('update_status');
+        });
+
         #upload image
         Route::post('upload/services', [UploadController::class, 'store']);
     });
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+    Route::get('producttype/{id}-{slug}.html', [App\Http\Controllers\ProducttypeController::class, 'index']);
 });

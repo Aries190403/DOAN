@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('slide_shows', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
+            $table->string('url', 255);
             $table->string('image_slide');
             $table->string('status');
             $table->softDeletes();

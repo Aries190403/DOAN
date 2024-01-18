@@ -27,7 +27,8 @@ class ProductTypeController extends Controller
     {
         try{
             ProductType::create([
-                'name' => (string)$request->input('name')
+                'name' => (string)$request->input('name'),
+                'status' => (string)$request->input('status')
             ]);
             Session::flash('success', 'Complete Add Product Type');
         } catch(\Exception $err)

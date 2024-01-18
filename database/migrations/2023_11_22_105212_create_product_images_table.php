@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             // $table->unsignedBigInteger('product_id');
             $table->string('image_path');
+            $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

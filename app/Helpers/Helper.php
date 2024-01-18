@@ -11,7 +11,7 @@ class Helper {
         foreach ($producttypes as $key => $producttype) {
                 $html .= '
                     <li>
-                        <a href="/category/' . $producttype->id . '-' . Str::slug($producttype->name, '-') . '.html">
+                        <a href="/producttype/' . $producttype->id . '-' . Str::slug($producttype->name, '-') . '.html">
                             ' . $producttype->name . '
                         </a>';
 

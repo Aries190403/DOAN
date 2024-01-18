@@ -89,7 +89,7 @@
         <ul class="main-menu-m">
             <li class="active-menu"><a href="/">Home</a> </li>
 
-            {{-- {!! $menusHtml !!} --}}
+            {{!! $producttypesHtml !!}}
 
             <li>
                 <a href="contact.html">Contact</a>
