@@ -90,7 +90,7 @@
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-204 flex-w flex-m respon6-next">
-                                    <form action="/add-cart" method="post">
+                                    <form action="" method="post">
                                         @if ($product->price !== NULL)
                                             <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -104,15 +104,13 @@
                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                 </div>
                                             </div>
+                                            <a href="{{ route('cart') }}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                                buy now
+                                            </a>
 
-                                            <button type="submit"
-                                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
-                                                Buy Now
-                                            </button>
-                                            <button type="submit"
-                                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
+                                            <a href="{{ route('cart.add', ['product_id' => $product->id])  }}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                                                 Add to cart
-                                            </button>
+                                            </a>
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         @endif
                                         @csrf
@@ -124,15 +122,16 @@
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#"
+                                <a href="{{ route('add.Favorite', ['productId' => $product->id])  }}"
                                 class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
                                 data-tooltip="Add to Wishlist">
                                     <i class="zmdi zmdi-favorite"></i>
                                 </a>
                             </div>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                            data-tooltip="Facebook">
+                            <a href="#" 
+                                class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                data-tooltip="Facebook">
                                 <i class="fa fa-facebook"></i>
                             </a>
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->decimal('total', 10, 2);
-            $table->int('status')->default('1');
+            $table->integer('status')->default('1');
             $table->timestamps();
             $table->softDeletes();
         });

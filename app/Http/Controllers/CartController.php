@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Http;
 use DB;
 
 class CartController extends Controller
@@ -21,21 +21,19 @@ class CartController extends Controller
             $cartProducts = DB::table('carts')
                 ->join('products', 'carts.product_id', '=', 'products.id')
                 ->select(
+                    'products.image',
                     'products.name',
                     'products.price',
                     'carts.quantity',
                     'products.id',
-                    DB::raw('(SELECT image_path FROM product_images WHERE product_images.product_id = products.id LIMIT 1) AS image_path')
                 )
                 ->where('carts.user_id', $userId)
                 ->get();
                 //dd($cartProducts);
             if ($cartProducts->isEmpty()) {
-                return view('cartshow', ['cartProducts' => null]); // Trả về view với biến cart rỗng
+                return view('cartshow', ['cartProducts' => null, 'title'=>'cart'] ); // Trả về view với biến cart rỗng
             }
-            // Session::put('cart', $cartProducts);
-            // dd(Session::get('cart'));
-            return view('cartshow', compact('cartProducts'));
+            return view('cartshow', compact('cartProducts'), ['title'=>'cart']);
         }
         else{
             // Nếu chưa đăng nhập, chưa có ID người dùng, trả về trang đăng nhập
@@ -45,6 +43,7 @@ class CartController extends Controller
 
     public function addcart($productId)
     {
+        // dd($productId);
         $quantity = 1;
         // Kiểm tra người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
@@ -106,5 +105,36 @@ class CartController extends Controller
         else {
             return redirect()->route('login')->with('message', 'Vui lòng đăng nhập để thêm/xoá sản phẩm vào giỏ hàng.');
         }   
+    }
+    public function checkoutshow()
+    {
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+
+            $cartProducts = DB::table('carts')
+                ->join('products', 'carts.product_id', '=', 'products.id')
+                ->select(
+                    'products.name',
+                    'products.price',
+                    'carts.quantity',
+                    'products.id',
+                    DB::raw('(SELECT image_path FROM product_images WHERE product_images.product_id = products.id LIMIT 1) AS image_path')
+                )
+                ->where('carts.user_id', $userId)
+                ->get();
+
+            $userData = DB::table('users')
+                ->select('fullName', 'email', 'phoneNumber', 'address')
+                ->where('id', $userId)
+                ->get();
+                //dd($userData);
+                session(['productsData' => $cartProducts]);
+                session(['user' => $userData]);
+            return view('checkout', compact('userData','cartProducts'),['title'=>'checkout']);
+        }
+        else{
+            // Nếu chưa đăng nhập, chưa có ID người dùng, trả về trang đăng nhập
+            return redirect()->route('login')->with('message', 'Vui lòng đăng nhập để xem giỏ hàng.');
+        }
     }
 }

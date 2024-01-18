@@ -34,11 +34,11 @@ class MainController extends Controller
             $cartProducts = DB::table('carts')
                 ->join('products', 'carts.product_id', '=', 'products.id')
                 ->select(
+                    'products.image',
                     'products.name',
                     'products.price',
                     'carts.quantity',
                     'products.id',
-                    DB::raw('(SELECT image_path FROM product_images WHERE product_images.product_id = products.id LIMIT 1) AS image_path')
                 )
                 ->where('carts.user_id', $userId)
                 ->get();

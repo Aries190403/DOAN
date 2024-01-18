@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\OderController;
 
 use App\Models\Product;
 
@@ -38,10 +40,16 @@ use App\Models\Product;
 
 
 
-Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart/add');
-Route::get('/cart/detete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart/delete');
+Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart.add');
+Route::get('/cart/detete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart.delete');
 Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
 
+Route::get('/favorites/add/{productId}', [FavoriteController::class, 'addFavorite'])->name('add.Favorite');
+Route::get('/favorites/remove/{productId}', [FavoriteController::class, 'removeFavorite']);
+Route::get('/favorites', [FavoriteController::class, 'showFavorites'])->name('favorites');
+
+Route::get('/checkout', [CartController::class, 'checkoutshow'])->name('checkout');
+Route::get('/order', [OderController::class, 'CreateIncvoice'])->name('order');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/store', [LoginController::class, 'store']);

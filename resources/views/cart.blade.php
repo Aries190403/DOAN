@@ -12,7 +12,10 @@
         </div>
 
         <div class="header-cart-content flex-w js-pscroll">
-            @php $sumPriceCart = 0; @endphp
+            @php
+                $sumPriceCart = 0;
+                $productData ="";
+            @endphp
             <ul class="header-cart-wrapitem w-full">
                 @php
                     $cartData = session('cart');
@@ -25,7 +28,7 @@
                     @endphp
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="storage/upload/product/{{$product->image_path}}" alt="Image 1" width="50" height="50">
+                            <img src="{{$product->image}}" alt="Image 1" width="50" height="50">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
@@ -55,7 +58,7 @@
                         View Cart
                     </a>
 
-                    <a href="/carts" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                    <a href="{{route('checkout')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                         Check Out
                     </a>
                 </div>

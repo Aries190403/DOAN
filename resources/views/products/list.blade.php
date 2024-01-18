@@ -45,7 +45,7 @@
 							<p>{{ number_format($product->price, 0, ',', ',') }} đ</p><br>
                         </span>
 
-                        <form action="{{ route('cart/add', ['product_id' => $product->id]) }}" method="GET" style="display: inline;">
+                        <form action="{{ route('cart.add', ['product_id' => $product->id]) }}" method="GET" style="display: inline;">
                             <button type="submit">
                                 <i class="fas fa-shopping-cart"></i> Add to Cart
                             </button>
