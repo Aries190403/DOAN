@@ -1,9 +1,10 @@
 @extends('main')
 @section('content')
-    @include('admin.alert')
+
     <form class="bg0 p-t-130 p-b-85">
     @if ($cartProducts !== null)
     @php $sumPriceCart = 0; @endphp
+    @include('admin.alert')
         <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -22,7 +23,7 @@
                                 </tr>
 
                                 @foreach ($cartProducts as $product)
-                                @php 
+                                @php
                                     $sumPriceCart = $sumPriceCart + $product->price * $product->quantity
                                 @endphp
                                     <tr class="table_row">
@@ -36,9 +37,9 @@
                                                 <a href="cart/delete/{{$product->id}}/{{$product->quantity}}" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" style="text-decoration: none;">
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </a>
-                                            
+
                                                 <input class="mtext-104 cl3 txt-center num-product" type="number" value="{{ $product->quantity }}" readonly>
-                                            
+
                                                 <a href="cart/add/{{$product->id}}" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" style="text-decoration: none;">
                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                 </a>

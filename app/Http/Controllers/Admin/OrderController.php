@@ -31,15 +31,16 @@ class OrderController extends Controller
     }
 
 
-    public function update(Invoice $invoice, UpdateInvoiceRequest $request)
+    public function update($invoiceid)
     {
-        if ($invoice->status == 1) {
-            $invoice->update(['status' => 2]);
+        try {
+            $invoice = Invoice::findOrFail($invoiceid);
+            $invoice->update(['status' => '2']);
 
-            Session::flash('success', 'Success Update Order');
+            Session::flash('success', 'Success Confirm Order');
             return redirect('admin/orders/list');
-        }else {
-            Session::flash('error', 'Error Update Order');
+        }catch(\Exception $error) {
+            Session::flash('error', 'Error Confirm Order');
             return redirect('admin/orders/list');
         }
     }

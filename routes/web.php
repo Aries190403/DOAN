@@ -41,7 +41,7 @@ use App\Models\Product;
 
 
 Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart.add');
-Route::get('/cart/detete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart.delete');
+Route::get('/cart/delete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart/delete');
 Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
 
 Route::get('/favorites/add/{productId}', [FavoriteController::class, 'addFavorite'])->name('add.Favorite');

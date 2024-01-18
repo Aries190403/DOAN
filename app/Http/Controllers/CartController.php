@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -49,12 +49,12 @@ class CartController extends Controller
         if (Auth::check()) {
             $userId = Auth::user()->id;
             //dd($userId,$productId,$quantity);
-    
+
             // Kiểm tra sản phẩm đã có trong giỏ hàng của người dùng chưa
             $existingCartItem = Cart::where('user_id', $userId)
                                     ->where('product_id', $productId)
                                     ->first();
-    
+
             if ($existingCartItem) {
                 // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
                 $existingCartItem->quantity += $quantity;
@@ -72,7 +72,7 @@ class CartController extends Controller
             return redirect()->route('login')->with('message', 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
         }
     }
-    
+
     public function deletecart($productId, $quantity)
     {
         // Kiểm tra người dùng đã đăng nhập hay chưa
@@ -101,10 +101,10 @@ class CartController extends Controller
                 ->delete();
                 return redirect()->back()->with('success', 'Đã xoá sản phẩm khỏi giỏ hàng.');
             }
-        } 
+        }
         else {
             return redirect()->route('login')->with('message', 'Vui lòng đăng nhập để thêm/xoá sản phẩm vào giỏ hàng.');
-        }   
+        }
     }
     public function checkoutshow()
     {

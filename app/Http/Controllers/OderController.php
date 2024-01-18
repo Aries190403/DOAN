@@ -19,7 +19,7 @@ class OderController extends Controller
             $userId = Auth::user()->id;
             $productData = session('productsData');
             $userData = session('user');
-    
+
             // Tính tổng giá tiền
             $totalAmount = 0;
             foreach ($productData as $product) {
@@ -36,7 +36,7 @@ class OderController extends Controller
                 'status' => 1,
                 'user_id' => $userId,
             ]);
-    
+
             // Thêm vào bảng invoice_details
             foreach ($productData as $product) {
                 //dd($product->quantity);

@@ -25,6 +25,16 @@ function removeRow(id, url){
     }
 }
 
+// function order($id, $url){
+//     success: function($result){
+//         if(result.error === false){
+//             alert(result.message)
+//             location.reload();
+//         } else {
+//             alert('Error')
+//         }
+//     }
+// }
 
 $('#upload').change(function() {
     const form = new FormData();
