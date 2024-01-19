@@ -41,7 +41,7 @@ use App\Models\Product;
 
 
 
-Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart.add');
+Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart/add');
 Route::get('/cart/delete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart/delete');
 Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
 
@@ -119,14 +119,12 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #comment
-        Route::prefix('comments')->group(function () {
         Route::prefix('comments')->group(function() {
             Route::get('list', [CommentController::class, 'list']);
             Route::DELETE('destroy', [CommentController::class, 'destroy']);
         });
 
-        #oder
-        Route::prefix('orders')->group(function () {
+        #order
         Route::prefix('orders')->group(function() {
             Route::get('list', [OrderController::class, 'index']);
             Route::get('view/{invoices}', [OrderController::class, 'detail']);
