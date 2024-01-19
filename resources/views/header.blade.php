@@ -37,18 +37,31 @@
 
                     {{-- sử lý nút login, log out, --}}
                     @guest
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person @if(Request::is('login*')) active @endif">
-                        <a class="nav-link" href="/login">
-                            <i class="zmdi zmdi-account"></i> <!-- Đây là biểu tượng đăng nhập của Font Awesome -->
-                        </a>
+                    <div class="user-dropdown icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person">
+                        <i class="zmdi zmdi-account-o"></i>
+                        <div class="dropdown-content">
+                            <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a>
+                            <a href="/register"><i class="zmdi zmdi-account-add"> Sign up</i></a>
+                            <!-- <a href="#">Link 2</a> -->
+                        </div>
                     </div>
                     @endguest
                     @auth
-                    <a class="nav-item">Hello {{ Auth::user()->fullName }}</a>
-                    <form method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <input type="submit" value="Logout" class="nav-link">
-                    </form>
+                    <div class="user-dropdown icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person">
+                        <i class="zmdi zmdi-account"></i>
+                        <div class="dropdown-content">
+                            <!-- <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a> -->
+                            <!-- <a href="#">Link 2</a> -->
+                            <a href="/login"><i class="zmdi zmdi-format-list-bulleted"></i>
+                                Your profile</a>
+                            <a>
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <input type="submit" class="nav-link" value="Log out">
+                                </form>
+                            </a>
+                        </div>
+                    </div>
                     @endauth
                     {{-- end code --}}
 
@@ -89,7 +102,7 @@
         <ul class="main-menu-m">
             <li class="active-menu"><a href="/">Home</a> </li>
 
-            {{-- {!! $menusHtml !!} --}}
+            {{!! $producttypesHtml !!}}
 
             <li>
                 <a href="contact.html">Contact</a>

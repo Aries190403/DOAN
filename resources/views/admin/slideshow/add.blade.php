@@ -26,7 +26,7 @@
                 <div id="image_show">
 
                 </div>
-                <input type="hidden" name="image_slide" id="image">
+                <input type="hidden" name="image_slide" id="file">
             </div>
 
             <div class="col-md-6">

@@ -68,11 +68,14 @@
                     <label>Product Type</label>
                     <select class="form-control" name="product_type_id">
                         @foreach($producttypes as $producttype)
-                            <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
+                            <option value="{{ $producttype->id }}" {{ $product->product_type_id == $producttype->id ? 'selected' : '' }}>
+                                {{ $producttype->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
             </div>
+
 
             <div class="col-md-6">
                 <label>Status</label>

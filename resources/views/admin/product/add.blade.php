@@ -67,7 +67,7 @@
                 <div id="image_show">
 
                 </div>
-                <input type="hidden" name="image" id="image">
+                <input type="hidden" name="image" id="file">
             </div>
 
             <div class="col-md-6">

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
             $table->unsignedInteger('stock')->default(0);
-            $table->unsignedBigInteger('image')->nullable();
+            $table->string('image')->nullable(); //sửa lại kiểu string để lấy file ảnh
             $table->string('ebook_link')->nullable();
+            $table->integer('status');
             $table->timestamps();
             $table->softDeletes();
         });

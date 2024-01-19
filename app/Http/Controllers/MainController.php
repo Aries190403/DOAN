@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 
 use App\Models\Cart;
+use App\Http\Services\Product\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,49 +18,15 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-    protected function fixImage(Product $p)
+    protected $product;
+
+    public function __construct( ProductService $product)
     {
-        // Lấy tất cả các hình ảnh từ bảng product_images dựa trên $p->id
-        $images = ProductImage::where('product_id', $p->id)->pluck('image_path')->toArray();
-
-        $imageUrls = [];
-
-        foreach ($images as $image) {
-            $fullImagePath = public_path("storage/upload/product/{$image}");
-
-            if (file_exists($fullImagePath)) {
-                $imageUrls[] = asset("storage/upload/product/{$image}");
-                // var_dump($imageUrls);
-            } else {
-                $imageUrls[] = asset("image/No-Image-Placeholder.svg (1).png");
-            }
-        }
-
-        $p->image = $imageUrls;
+        $this->product = $product;
     }
 
-
-
-
-    // public function index()
-    // {
-    //     $productType = ProductType::all();
-    //     $lst = Product::all();
-    //     foreach ($lst as $p) {
-    //         $this->fixImage($p);
-    //     }
-    //     return view('home', [
-    //         'title' => 'Home', 'lst' => $lst, 'productType' => $productType
-    //     ]);
-    // }
     public function index()
     {
-        $productType = ProductType::all();
-        //$lst = Product::all();
-        $lst = Product::paginate(20);
-        foreach ($lst as $p) {
-            $this->fixImage($p);
-        }
 
         if (Auth::check()) {
             $userId = Auth::user()->id;
@@ -79,32 +46,40 @@ class MainController extends Controller
             Session::put('cart', $cartProducts);
             // dd(Session::get('cart'));
             return view('home', [
-                'title' => 'Home', 'lst' => $lst, 'productType' => $productType, 'cartProducts' => $cartProducts,
-                'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
-                'slideshows' => SlideShow::where('status', 1)->get()
+                'title' => 'Coza', 'cartProducts' => $cartProducts,
+                'producttypes' => ProductType::select('id', 'name')->where('status', 1)->orderbyDesc('id')->get(),
+                'slideshows' => SlideShow::where('status', 1)->get(),
+                'products' => $this->product->get()
             ]);
         } else {
             return view('home', [
-                'title' => 'Home', 'lst' => $lst, 'productType' => $productType,
+                'title' => 'Coza',
                 'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
-                'slideshows' => SlideShow::where('status', 1)->get()
+                'slideshows' => SlideShow::where('status', 1)->get(),
+                'products' => $this->product->get()
             ]);
         }
     }
+    const LIMIT = 16;
 
 
-    public function show(Request $request, Product $product)
+
+    public function loadProduct(Request $request)
     {
-        $this->fixImage($product);
-        if ($request->expectsJson()) {
-            return $product;
+        $page = $request->input('page', 0);
+
+        $result = $this->product->get($page);
+
+        if (count($result) != 0) {
+            $html = view('products.list',
+                ['products' => $result ])->render();
+
+            return response()->json([ 'html' => $html ]);
         }
-        return view('product-show', [
-            'title' => 'Product', 'p' => $product,
-            'producttypes' => ProductType::select('id', 'name')->where('status', 1)->get(),
-            'slideshows' => SlideShow::where('status', 1)->get()
-        ]);
+
+        return response()->json(['html' => '' ]);
     }
+
     public function showCart()
     {
         $cartProducts = "";

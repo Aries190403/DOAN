@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->boolean('isAdmin')->default(false);
             $table->string('avatar')->nullable();
+            $table->integer('status');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
