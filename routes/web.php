@@ -59,6 +59,7 @@ Route::post('/register', [RegisterController::class, 'postregister'])->name('reg
 
 Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/products/{product}', [MainController::class, 'show'])->name('product-show');
+Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
 
@@ -124,7 +125,5 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-    Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
     Route::get('producttype/{id}-{slug}.html', [App\Http\Controllers\ProducttypeController::class, 'index']);
 });

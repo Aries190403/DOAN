@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         // Khóa ngoại từ sản phẩm đến loại sản phẩm
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('product_type_id')->constrained('product_types');
@@ -50,6 +51,10 @@ return new class extends Migration
         //Khóa ngoại bảng hình ảnh sản phẩm
         Schema::table('product_images', function (Blueprint $table) {
             $table->foreignId('product_id')->constrained('products');
+        });
+        //khoá ngoại từ coupon đến incvoice
+            Schema::table('invoices', function (Blueprint $table) {
+            $table->foreignId('coupon_id')->nullable()->constrained('coupons');
         });
     }
 
