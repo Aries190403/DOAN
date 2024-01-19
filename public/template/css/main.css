@@ -3332,6 +3332,165 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 /*
+/* #loadProduct{
+  background-color: yellowgreen;
+  margin-bottom: 10px;
+}
+
+.product{
+  padding-left: 30px;
+  white-space: nowrap;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.product div{
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+
+.product p{
+  font-size: 20px;
+  color: red; float: left;
+}
+.boder{
+  margin-top: 5px;
+  border: solid 1px red;
+  border-radius: 20px;
+  background-color: white;
+}
+#btn-addToCart{
+  background-color: green;
+    color: white;
+    padding: 4px;
+font-size: 20px;
+  border-radius: 10px;
+  margin-left: 36px;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filter-group label {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.productImage {
+  width: 250px;
+  height: 250px;
+    margin-top: 10px;
+}
+
+#showproduct {
+  background-color: yellowgreen;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.swiper-slide {
+  background-color: white;
+  border-radius: 10px;
+
+}
+
+#showproduct .swiper-container {
+  margin-bottom: 20px;
+}
+
+#showproduct .desc, .cmt{
+  background-color: white;
+  border-radius: 10px;
+}
+
+.image-carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  white-space: nowrap;
+  width: 250px;
+  height: 480px;
+}
+
+#showproduct #img{
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+#showproduct #buyNow,.addcart{
+margin: 188px 0 0 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
+}
+
+.cmt{
+  margin-left: 40px;
+  width: 448px;
+}
+
+.cmt form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 368px;
+}
+
+.cmt input {
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 1cm;
+  padding: 5px;
+}
+
+.cmt button {
+  background-color: grey;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  float: right;
+  border-radius: 10px;
+}
+
+.wrap-icon-header{
+  display: contents;
+}
+
+.buynow{
+    width: 504px;
+      height: 35px;
+      background-color: green;
+      color: white;
+      border-radius: 10px;
+}
+
 .addtocart{
     margin-top: 216px;
       height: 36px;

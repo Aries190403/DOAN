@@ -40,6 +40,8 @@ class AuthController extends Controller
                 'address' => $request->address,
                 'status' => 1,
             ]);
+
+
             DB::commit();
             Session::flash('success', 'User added successfully.');
         } catch (\Exception $e) {

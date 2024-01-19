@@ -44,6 +44,7 @@
         </div>
     </div>
 </div>
+@include('admin.alert')
 
 <!-- Product -->
 <section class="bg0 p-t-23 p-b-140">

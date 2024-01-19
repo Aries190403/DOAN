@@ -39,6 +39,7 @@ class RegisterController extends Controller
             $user->phoneNumber = $request->phoneNumber;
             $user->address = $request->address;
             $user->status = 1;
+            $user->status = 0;
             $user->save();
 
             DB::commit();

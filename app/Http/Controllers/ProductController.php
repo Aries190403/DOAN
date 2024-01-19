@@ -28,6 +28,9 @@ class ProductController extends Controller
         // Eager load mối quan hệ productimages
         $product->load('productimages');
 
+        // Eager load mối quan hệ productimages
+        $product->load('productimages');
+
         return view('products.detail', [
             'title' => $product->name,
             'product' => $product,

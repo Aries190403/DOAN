@@ -44,6 +44,8 @@
                 </a>
                 <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{ $account->id }}, '/admin/accounts/destroy')"> -->
                 <i class="fas fa-trash"></i>
+                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{ $account->id }}, '/admin/accounts/destroy')">
+                    <i class="fas fa-trash"></i>
                 </a>
             </td>
         </tr>

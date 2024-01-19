@@ -84,8 +84,10 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p> User
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                            <i class="nav-icon fas fa-image"></i>
+                            <p> Product Image
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
@@ -116,6 +118,14 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Product Image</p>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/productimages/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <a href="/admin/productimages/add" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Product Image</p>
+                                </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/productimages/list" class="nav-link">
