@@ -84,10 +84,9 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p> User
-                            <i class="nav-icon fas fa-image"></i>
-                            <p> Product Image
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                            <i class="right fas fa-angle-left"></i>
+
+                        </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
