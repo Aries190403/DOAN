@@ -15,9 +15,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideShowController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\CouponController;
 
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OderController;
@@ -120,6 +120,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{slideshow}', [SlideShowController::class, 'edit']);
             Route::post('edit/{slideshow}', [SlideShowController::class, 'update']);
             Route::DELETE('destroy', [SlideShowController::class, 'destroy']);
+        });
+
+        #coupon
+        Route::prefix('coupons')->group(function() {
+            Route::get('add', [CouponController::class, 'create']);
+            Route::post('add', [CouponController::class, 'store']);
+            Route::get('list', [CouponController::class, 'list']);
+            Route::get('edit/{coupon}', [CouponController::class, 'edit']);
+            Route::post('edit/{coupon}', [CouponController::class, 'update']);
+            Route::DELETE('destroy', [CouponController::class, 'destroy']);
         });
 
         #comment
