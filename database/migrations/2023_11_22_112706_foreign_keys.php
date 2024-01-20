@@ -20,13 +20,14 @@ return new class extends Migration
         //Khóa ngoại từ bảng hóa đơn đến user
         Schema::table('invoices', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('coupon_id')->nullable()->constrained('coupons');
         });
 
         //Khóa ngoại từ bảng chi tết hóa đơn đến hóa đơn, sản phẩm, combo
         Schema::table('invoice_details', function (Blueprint $table) {
             $table->foreignId('invoice_id')->constrained('invoices');
             $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('combo_id')->constrained('combos');
+            $table->foreignId('combo_id')->nullable()->constrained('combos');
         });
 
         //Khóa ngoại từ bảng chi tiết combo đến combo
@@ -45,16 +46,12 @@ return new class extends Migration
         Schema::table('carts', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('combo_id')->constrained('combos');
+            $table->foreignId('combo_id')->nullable()->constrained('combos');
         });
 
         //Khóa ngoại bảng hình ảnh sản phẩm
         Schema::table('product_images', function (Blueprint $table) {
             $table->foreignId('product_id')->constrained('products');
-        });
-        //khoá ngoại từ coupon đến incvoice
-            Schema::table('invoices', function (Blueprint $table) {
-            $table->foreignId('coupon_id')->nullable()->constrained('coupons');
         });
     }
 

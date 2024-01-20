@@ -50,6 +50,7 @@ Route::get('/favorites', [FavoriteController::class, 'showFavorites'])->name('fa
 
 Route::get('/checkout', [CartController::class, 'checkoutshow'])->name('checkout');
 Route::get('/order', [OderController::class, 'CreateIncvoice'])->name('order');
+Route::post('/applycoupon', [CartController::class, 'applyCoupon'])->name('applycoupon');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/store', [LoginController::class, 'store']);
