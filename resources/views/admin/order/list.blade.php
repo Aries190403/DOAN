@@ -16,7 +16,9 @@
     </thead>
     <tbody>
         @php
-        <@php $invoiceid=null; @endphp @foreach($invoices as $key=> $invoice)
+            $invoiceid=null;
+         @endphp
+        @foreach($invoices as $key=> $invoice)
             <tr>
                 @php
                 $invoiceid = $invoice->id;
