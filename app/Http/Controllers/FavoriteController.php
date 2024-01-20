@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
@@ -52,7 +52,7 @@ class FavoriteController extends Controller
     public function showFavorites()
     {
         $favorites = Session::get('favorites', []);
-        // dd($favorites); 
+        // dd($favorites);
         return view('favorites', ['favorites' => $favorites],['title'=>'checkout']);
     }
 }

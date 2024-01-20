@@ -21,6 +21,7 @@ use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OderController;
+use App\Http\Controllers\OrderUserController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 
@@ -89,12 +90,12 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #user
-        Route::prefix('accounts')->group(function () {
+        Route::prefix('users')->group(function () {
             Route::get('add', [AuthController::class, 'create']);
             Route::post('add', [AuthController::class, 'store']);
             Route::get('list', [AuthController::class, 'list']);
-            Route::get('edit/{id}', [AuthController::class, 'edit']);
-            Route::post('edit/{id}', [AuthController::class, 'update']);
+            Route::get('edit/{user}', [AuthController::class, 'edit']);
+            Route::post('edit/{user}', [AuthController::class, 'update']);
             Route::DELETE('destroy', [AuthController::class, 'destroy']);
         });
 
@@ -151,4 +152,6 @@ Route::prefix('/profile')->group(function () {
     Route::post('/password', [UserController::class, 'updatepassword']);
 });
 
-Route::get('/userorderlist', [UserController::class, 'orderlist']);
+Route::get('/userorderlist', [OrderUserController::class, 'list']);
+Route::get('/userorderlist/{invoice}', [OrderUserController::class, 'vieworder']);
+Route::post('/userorderlist/{invoice}', [OrderUserController::class, 'updateStatus'] )->name('update.status');

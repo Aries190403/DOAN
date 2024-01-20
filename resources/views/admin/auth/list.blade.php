@@ -39,11 +39,11 @@
                 @endif
             </td>
             <td>
-                <a class="btn btn-primary btn-sm" href="/admin/accounts/edit/{{ $account->id }}">
+                <a class="btn btn-primary btn-sm" href="/admin/users/edit/{{ $account->id }}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{ $account->id }}, '/admin/accounts/destroy')"> -->
-                <i class="fas fa-trash"></i>
+                {{-- <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{ $account->id }}, '/admin/accounts/destroy')"> -->
+                <i class="fas fa-trash"></i> --}}
             </td>
         </tr>
         @endforeach

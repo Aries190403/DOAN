@@ -31,7 +31,7 @@
                                             <img src="{{$product->image}}" alt="Image 1" width="100" height="100">
                                         </td>
                                         <td class="column-2">{{ $product->name }}</td>
-                                        <td class="column-3">{{ number_format($product->price, 0, '', '.') }}</td>
+                                        <td class="column-3">{{ number_format($product->price, 0, '', '.') }} Đ</td>
                                         <td class="column-4">
                                             <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                 <a href="cart/delete/{{$product->id}}/{{$product->quantity}}" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" style="text-decoration: none;">
@@ -45,7 +45,7 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td class="column-5">{{ number_format($product->price * $product->quantity, 2)  }}</td>
+                                        <td class="column-5">{{ number_format($product->price * $product->quantity, 0, '', '.')  }} Đ</td>
                                         <td class="p-r-15">
                                             {{-- <a href="cart/delete/{{$product->id}}/{{$product->quantity}}">Xóa</a> --}}
                                         </td>

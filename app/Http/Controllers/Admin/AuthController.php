@@ -76,41 +76,31 @@ class AuthController extends Controller
         // dd(User::find($id));
         return view('admin.auth.edit', [
             'title' => 'Edit Account: ' . User::find($id)->fullName,
-            'account' => User::find($id),
+            'user' => User::find($id),
         ]);
     }
 
-    public function update(User $account, Request $request)
+    public function update(User $user, Request $request)
     {
         try {
-            // $data = $request->validate([
-            //     'username' => 'required|string',
-            //     'email' => 'required|email',
-            //     'fullName' => 'required|string',
-            //     'phoneNumber' => 'nullable|string',
-            //     'address' => 'nullable|string',
-            //     'isAdmin' => 'required|boolean',
-            //     'status' => 'required|boolean',
-            // ]);
+            $request->except('_tokent');
 
-            // Update common fields
-            $account->fill($request->input());
+            $user->username = (string)$request->input('username');
+            $user->email = (string)$request->input('email');
+            $user->fullName = (string)$request->input('fullName');
+            $user->phoneNumber = (string)$request->input('phoneNumber');
+            $user->address = (string)$request->input('address');
+            $user->isAdmin = (string)$request->input('isAdmin');
+            $user->status = (string)$request->input('status');
 
-            // Update password if a new password is provided
-            // if ($request->filled('password')) {
-            //     $account->password = bcrypt($request->input('password'));
-            // }
-
-            // Save changes
-            $account->save();
+            $user->save();
 
             Session::flash('success', 'Complete Update');
         } catch (\Exception $err) {
-            Log::error($err->getMessage());
             Session::flash('error', 'Error Update');
             return redirect()->back()->withInput();
         }
 
-        return redirect('/admin/accounts/list');
+        return redirect('/admin/users/list');
     }
 }

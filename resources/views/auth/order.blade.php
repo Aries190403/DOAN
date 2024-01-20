@@ -1,90 +1,152 @@
 @extends('main')
+
 @section('content')
-<div class="container p-t-80">
-    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
-            Home
-            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-        </a>
+    <form class="bg0 p-t-130 p-b-85" method="post">
+        @include('admin.alert')
 
-        <span class="stext-109 cl4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                        <div class="m-l-25 m-r--38 m-lr-0-xl">
+                            <div class="wrap-table-shopping-cart">
+                                @php $total = 0; @endphp
+                                <table class="table-shopping-cart">
+                                    <tbody>
+                                    <tr class="table_head">
+                                        <th class="column-1">Product</th>
+                                        <th class="column-2"></th>
+                                        <th class="column-3">Price</th>
+                                        <th class="column-4">Quantity</th>
+                                        <th class="column-5">Total</th>
+                                        {{-- <th class="column-6">&nbsp;</th> --}}
+                                    </tr>
 
-            Coza Order
+                                    @foreach($invoicedetails as $key => $invoicedetail)
+                                        @php
+                                            $price = $invoicedetail->unit_price * $invoicedetail->quantity;
+                                            $total += $price;
 
-        </span>
-    </div>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('.alert-danger').fadeOut();
-            }, 4000);
-        });
-    </script>
-    @endif
-    {{--@foreach($invoices as $user)--}}
-    <div class="container">
-        <article class="card">
-            <div class="card-body">
-                <h6>Order ID: OD45345345435</h6>
-                <article class="card">
-                    <div class="card-body row">
-                        <div class="col"> <strong>Estimated Delivery time:</strong> <br>29 nov 2019 </div>
-                        <div class="col"> <strong>Shipping BY:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
-                        <div class="col"> <strong>Status:</strong> <br> Picked by the courier </div>
-                        <div class="col"> <strong>Tracking #:</strong> <br> BD045903594059 </div>
+                                            $detailid = null;
+                                        @endphp
+                                        <tr class="table_row">
+                                            <td class="column-1">
+                                                <div class="how-itemcart1">
+                                                    <img src="{{ $invoicedetail->product->image }}" alt="IMG">
+                                                </div>
+                                            </td>
+                                            <td class="column-2">{{ $invoicedetail->product->name }}</td>
+                                            <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
+                                            <td class="column-4">{{ $invoicedetail->quantity }}</td>
+                                            <td class="column-5">{{ number_format($price, 0, '', '.') }}</td>
+                                        </tr>
+                                    @endforeach
+                                    {{-- <tr>
+                                        <td colspan="4" class="text-right">Total price:</td>
+                                        <td>{{ number_format($total, 0, '', '.') }}</td>
+                                    </tr> --}}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            @csrf
+                        </div>
                     </div>
-                </article>
-                <div class="track">
-                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
-                    <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
-                    <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
-                    <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
-                </div>
-                <hr>
-                <ul class="row">
-                    <li class="col-md-4">
-                        <figure class="itemside mb-3">
-                            <div class="aside"><img src="https://i.imgur.com/iDwDQ4o.png" class="img-sm border"></div>
-                            <figcaption class="info align-self-center">
-                                <p class="title">Dell Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$950 </span>
-                            </figcaption>
-                        </figure>
-                    </li>
-                    <li class="col-md-4">
-                        <figure class="itemside mb-3">
-                            <div class="aside"><img src="https://i.imgur.com/tVBy5Q0.png" class="img-sm border"></div>
-                            <figcaption class="info align-self-center">
-                                <p class="title">HP Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$850 </span>
-                            </figcaption>
-                        </figure>
-                    </li>
-                    <li class="col-md-4">
-                        <figure class="itemside mb-3">
-                            <div class="aside"><img src="https://i.imgur.com/Bd56jKH.png" class="img-sm border"></div>
-                            <figcaption class="info align-self-center">
-                                <p class="title">ACER Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$650 </span>
-                            </figcaption>
-                        </figure>
-                    </li>
-                </ul>
-                <hr>
-                <a href="#" class="btn btn-danger" data-abc="true">Hủy đơn</a>
-                <a href="#" class="btn btn-info" data-abc="true">Đã nhận</a>
-            </div>
-        </article>
-    </div>
-    {{--@endforeach--}}
 
-</div>
-</div>
-</div>
+                    <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                        <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                            <h4 class="mtext-109 cl2 p-b-30">
+                                Information
+                            </h4>
+
+                            <div class="flex-w flex-t p-t-27 p-b-33">
+                                <div class="size-208">
+                                    <span class="mtext-101 cl2">
+                                        Total:
+                                    </span>
+                                </div>
+
+                                <div class="size-209 p-t-1">
+                                    <span class="mtext-110 cl2">
+                                        {{ number_format($total, 0, '', '.') }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex-w flex-t p-t-27 p-b-33">
+                                <div class="size-208">
+                                    <span class="mtext-101 cl2">
+                                        Status:
+                                    </span>
+                                </div>
+
+                                <div class="size-209 p-t-1">
+                                    <span class="mtext-110 cl2">
+                                        @if ($invoicedetail->invoice->status == 1)
+                                            <span class="mtext-101 cl2">PROCESSING</span>
+                                        @elseif ($invoicedetail->invoice->status == 2)
+                                            <span class="mtext-101 cl2">TRANSPORT</span>
+                                        @elseif ($invoicedetail->invoice->status == 3)
+                                            <span class="mtext-101 cl2">DELIVERED</span>
+                                        @elseif ($invoicedetail->invoice->status == 0)
+                                            <span class="mtext-101 cl2">CANCELLED</span>
+                                        @endif
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+
+                                <div class="size-100 p-r-18 p-r-0-sm w-full-ssm">
+
+                                    <div class="p-t-15">
+                                        <span class="stext-112 cl8">
+                                            Customer information
+                                        </span>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <span class="stext-111 cl8 plh3 size-111 p-lr-15">Name: {{ Auth::user()->fullName }}</span>
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <span class="stext-111 cl8 plh3 size-111 p-lr-15">Phone: {{ Auth::user()->phoneNumber }}</span>
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <span class="stext-111 cl8 plh3 size-111 p-lr-15">Address: {{ Auth::user()->address }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form method="POST" action="{{ route('update.status', ['invoice' => $invoicedetail->invoice->id]) }}">
+                                @csrf
+                                @if ($invoicedetail->invoice->status == 1)
+                                    <input type="hidden" name="status" value="cancel">
+                                    <button type="submit" class="btn btn-danger">Hủy</button>
+                                @endif
+                            </form>
+
+                            <form method="POST" action="{{ route('update.status', ['invoice' => $invoicedetail->invoice->id]) }}">
+                                @csrf
+                                @if ($invoicedetail->invoice->status == 2)
+                                    <input type="hidden" name="status" value="received">
+                                    <button type="submit" class="btn btn-success">Đã nhận</button>
+                                @endif
+                            </form>
+
+                            {{-- @if ($invoicedetail->invoice->status == 1)
+                                <a href="{{ route('update.status'}}" class="btn btn-danger" data-abc="true">Hủy đơn</a>
+                            @endif
+
+                            @if ($invoicedetail->invoice->status == 2)
+                                <a href="{{ route('update.status'}}" class="btn btn-info" data-abc="true">Đã nhận</a>
+                            @endif --}}
+
+                            @csrf
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 @endsection

@@ -90,13 +90,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/accounts/add" class="nav-link">
+                            <a href="/admin/users/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add User</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/accounts/list" class="nav-link">
+                            <a href="/admin/users/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User List</p>
                             </a>
@@ -117,14 +117,6 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Product Image</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/productimages/list" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <a href="/admin/productimages/add" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add Product Image</p>
-                                </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/productimages/list" class="nav-link">
