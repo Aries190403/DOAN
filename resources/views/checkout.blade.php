@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
+                        <form id="address" action="{{ route('order') }}" method="get">
                         <div class="card-body">
                             <h4 class="card-title">Personal information</h4>
                             <div class="mb-3">
@@ -22,9 +23,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="apartment_number" class="form-label">Address</label>
-                                <input type="text" class="form-control" value="{{ $userData[0]->address }}"placeholder="Nhập địa chỉ nhà">
+                                <input type="text" class="form-control" name="diachi" value="{{ $userData[0]->address }}"placeholder="Nhập địa chỉ nhà">
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
                 
@@ -74,17 +76,20 @@
                                     <span >{{ $sumPriceCart - $pricediscount}}</span>
                                 </div>
                                 <br>
-                                <form action="{{ route('applycoupon') }}" method="POST">
+                                <form id="voucher" action="{{ route('applycoupon') }}" method="POST">
                                     @csrf
                                     <div class="flex-w flex-m m-r-20 m-tb-5">
                                         <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
                                             name="coupon" placeholder="Coupon Code">
-                                        <button type="submit"
+                                        {{-- <button type="submit"
                                                 class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                             Apply coupon
-                                        </button>
+                                        </button> --}}
                                     </div>
                                 </form>
+                                <a href="{{ route('applycoupon') }}" onclick="event.preventDefault(); document.getElementById('voucher').submit();"
+                                class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5"
+                                >Apply Coupon</a>
                             <div class="text-center">
                                 @if ($sumPriceCart !== null && $sumPriceCart > 0)
                                 <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -92,9 +97,9 @@
                                     </div>
                                 </div>
                                 <br>
-                                    <a href="{{ route('order') }}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                                        Order
-                                    </a>
+                                    <a href="{{ route('order') }}" onclick="event.preventDefault(); document.getElementById('address').submit();"
+                                    class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
+                                    >Order</a>
                                 @else
                                 <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                                     <div class="size-100 p-r-18 p-r-0-sm w-full-ssm">

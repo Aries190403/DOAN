@@ -14,6 +14,7 @@ use DB;
 
 class OderController extends Controller
 {
+
     public function CreateIncvoice(Request $request){
         if (Auth::check()) {
             $userId = Auth::user()->id;
@@ -21,6 +22,7 @@ class OderController extends Controller
             $userData = session('user');
             $voucher = session('voucher');
             $voucherdata = NULL;
+            $idvoucher = NULL;
             // Tính tổng giá tiền
             $totalAmount = 0;
             foreach ($productData as $product) {
@@ -38,15 +40,22 @@ class OderController extends Controller
                         'is_active' => DB::raw('is_active - 1'),]);
 
                 $totalAmount = $totalAmount - ($totalAmount * $voucherdata->discount / 100);
-            };
-            // dd($voucherdata->id);
+                $idvoucher = $voucherdata->id;
+            }
+
+            $address= $request->input('diachi');
+
+            if($address==NULL){
+                $address = Auth::user()->address;
+            }
+            // dd($address,  $idvoucher);
             // Thêm vào bảng invoices
             $invoice = Invoice::create([
                 'invoice_date' => Carbon::now(),
-                'address' => $userData[0]->address,
+                'address' => $address,
                 'phone' => $userData[0]->phoneNumber,
                 'total' => $totalAmount,
-                'coupon_id' => $voucherdata->id,
+                'coupon_id' => $idvoucher,
                 'status' => 1,
                 'user_id' => $userId,
             ]);
