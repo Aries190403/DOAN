@@ -11,16 +11,18 @@ use Illuminate\Http\Request;
 
 use App\Models\Cart;
 use App\Http\Services\Product\ProductService;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
     protected $product;
 
-    public function __construct( ProductService $product)
+    public function __construct(ProductService $product)
     {
         $this->product = $product;
     }
@@ -71,13 +73,15 @@ class MainController extends Controller
         $result = $this->product->get($page);
 
         if (count($result) != 0) {
-            $html = view('products.list',
-                ['products' => $result ])->render();
+            $html = view(
+                'products.list',
+                ['products' => $result]
+            )->render();
 
-            return response()->json([ 'html' => $html ]);
+            return response()->json(['html' => $html]);
         }
 
-        return response()->json(['html' => '' ]);
+        return response()->json(['html' => '']);
     }
 
     public function showCart()

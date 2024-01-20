@@ -7,7 +7,7 @@
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="/template/images/icons/logo-01.png" alt="IMG-LOGO">
                 </a>
 
@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Icon header -->
-                <div class="wrap-icon-header flex-w flex-r-m">
+                <div class="wrap-icon-header flex-w flex-r-m" style="display: contents;">
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                         <i class="zmdi zmdi-search"></i>
                     </div>
@@ -52,9 +52,12 @@
                         <div class="dropdown-content">
                             <!-- <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a> -->
                             <!-- <a href="#">Link 2</a> -->
-                            <a href="/login"><i class="zmdi zmdi-format-list-bulleted"></i>
+                            <a href="/profile"><i class="zmdi zmdi-format-list-bulleted"></i>
                                 Your profile</a>
+                            <a href="/userorderlist"><i class="zmdi zmdi-shopping-basket"></i>
+                                Your order</a>
                             <a>
+
                                 <form method="post" action="{{ route('logout') }}">
                                     @csrf
                                     <input type="submit" class="nav-link" value="Log out">

@@ -21,7 +21,7 @@ use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OderController;
-
+use App\Http\Controllers\UserController;
 use App\Models\Product;
 
 /*
@@ -119,13 +119,13 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #comment
-        Route::prefix('comments')->group(function() {
+        Route::prefix('comments')->group(function () {
             Route::get('list', [CommentController::class, 'list']);
             Route::DELETE('destroy', [CommentController::class, 'destroy']);
         });
 
         #order
-        Route::prefix('orders')->group(function() {
+        Route::prefix('orders')->group(function () {
             Route::get('list', [OrderController::class, 'index']);
             Route::get('view/{invoices}', [OrderController::class, 'detail']);
             Route::post('view/{invoices}', [OrderController::class, 'update'])->name('update_status');
@@ -142,3 +142,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
 Route::post('product/{id}', [App\Http\Controllers\CommentController::class, 'create']);
+
+Route::prefix('/profile')->group(function () {
+    Route::get('/', [UserController::class, 'profile']);
+    Route::get('/editprofile', [UserController::class, 'editprofile']);
+    Route::post('/editprofile', [UserController::class, 'update']);
+    Route::get('/password', [UserController::class, 'editpassword']);
+    Route::post('/password', [UserController::class, 'updatepassword']);
+});
+
+Route::get('/userorderlist', [UserController::class, 'orderlist']);
