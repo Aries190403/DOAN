@@ -152,6 +152,29 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tags"></i>
+                        <p> Coupon
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/coupons/add" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Coupon</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/coupons/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Coupon List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p> Home
                             <i class="right fas fa-angle-left"></i>
