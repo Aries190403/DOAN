@@ -34,6 +34,14 @@
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
+                    <div>
+                        <a href="/favorites"
+                        class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 tooltip100" 
+                        data-tooltip="Wishlist">
+                        <i class="zmdi zmdi-favorite"></i>
+                        </a>
+                    </div>
+
 
                     {{-- sử lý nút login, log out, --}}
                     @guest
@@ -121,11 +129,11 @@
                 <img src="/template/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
-            <form class="wrap-search-header flex-w p-l-15">
+            <form action="/search" class="wrap-search-header flex-w p-l-15">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="search" value="" placeholder="Search...">
             </form>
         </div>
     </div>

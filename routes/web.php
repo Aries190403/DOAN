@@ -49,6 +49,8 @@ Route::get('/favorites/add/{productId}', [FavoriteController::class, 'addFavorit
 Route::get('/favorites/remove/{productId}', [FavoriteController::class, 'removeFavorite']);
 Route::get('/favorites', [FavoriteController::class, 'showFavorites'])->name('favorites');
 
+Route::get('/search', [MainController::class, 'searchprod'])->name('favorites');
+
 Route::get('/checkout', [CartController::class, 'checkoutshow'])->name('checkout');
 Route::get('/order', [OderController::class, 'CreateIncvoice'])->name('order');
 Route::post('/applycoupon', [CartController::class, 'applyCoupon'])->name('applycoupon');

@@ -7,6 +7,7 @@ use App\Models\ProductImage;
 use App\Models\ProductType;
 use App\Models\SlideShow;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 
 use App\Models\Cart;
@@ -88,5 +89,12 @@ class MainController extends Controller
     {
         $cartProducts = "";
         return view('header', ['cartProducts' => $cartProducts]);
+    }
+
+    public function searchprod(Request $request)
+    {
+        $searchProducts= Product::where('name','LIKE','%'.$request->search.'%')->latest()->paginate(15);
+        // dd($searchProducts);
+        return view('products.searchprodcuts', compact('searchProducts'),['title'=>'checkout']);
     }
 }

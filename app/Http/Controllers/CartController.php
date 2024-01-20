@@ -41,10 +41,13 @@ class CartController extends Controller
         }
     }
 
-    public function addcart($productId)
+    public function addcart($productId, Request $request)
     {
-        // dd($productId);
-        $quantity = 1;
+        if((int)$request->input('num_product') != 0)
+            $quantity = (int)$request->input('num_product');
+        else
+            $quantity = 1;
+        // dd($quantity);
         // Kiểm tra người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             $userId = Auth::user()->id;
