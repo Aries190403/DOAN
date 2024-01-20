@@ -1,11 +1,8 @@
 @extends('main')
 
 @section('content')
-
-<form class="bg0 p-t-130 p-b-85">
     @include('admin.alert')
-    @csrf
-        <div class="container mt-5">
+        <div class="container mt-5 bg0 p-t-130 p-b-85">
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
@@ -30,12 +27,25 @@
                         </div>
                     </div>
                 </div>
-                @php $sumPriceCart = 0; @endphp
+                
+                @php 
+                    $sumPriceCart = 0;
+                    $pricediscount = 0;
+                @endphp
                 @foreach ($cartProducts as $product)
-                    @php 
-                        $sumPriceCart = $sumPriceCart + $product->price * $product->quantity
+                    @php
+                        $sumPriceCart = $sumPriceCart + $product->price * $product->quantity;
                     @endphp
                 @endforeach
+                @if (session('discount') != 0)
+                    @php
+                        $pricediscount = $sumPriceCart * session('discount') / 100;
+                    @endphp
+                @else
+                    @php
+                        session()->forget('voucher');
+                    @endphp
+                @endif
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
@@ -43,7 +53,7 @@
                             <div class="mb-3">
                                 <div class="info__order-box">
                                     <span>total product cost: </span>
-                                    <span>{{ $sumPriceCart }}</span>
+                                    <span>{{ $sumPriceCart}}</span>
                                 </div>
                             </div>
                             {{-- <div class="mb-3">
@@ -55,14 +65,26 @@
                             <div class="mb-3">
                                 <div class="info__order-box">
                                     <span>Discount applies: </span>
-                                    <span>0</span>
+                                    <span>{{session('discount')}} %</span>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div style="color: red; font-weight: bold" class="info__order-box">
                                     <span>Total: </span>
-                                    <span >{{ $sumPriceCart }}</span>
+                                    <span >{{ $sumPriceCart - $pricediscount}}</span>
                                 </div>
+                                <br>
+                                <form action="{{ route('applycoupon') }}" method="POST">
+                                    @csrf
+                                    <div class="flex-w flex-m m-r-20 m-tb-5">
+                                        <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+                                            name="coupon" placeholder="Coupon Code">
+                                        <button type="submit"
+                                                class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                            Apply coupon
+                                        </button>
+                                    </div>
+                                </form>
                             <div class="text-center">
                                 @if ($sumPriceCart !== null && $sumPriceCart > 0)
                                 <div class="flex-w flex-t bor12 p-t-15 p-b-30">
@@ -89,5 +111,4 @@
                 </div>
             </div>
         </div>
-</form>
 @endsection

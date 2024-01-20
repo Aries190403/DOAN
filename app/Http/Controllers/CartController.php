@@ -137,4 +137,22 @@ class CartController extends Controller
             return redirect()->route('login')->with('message', 'Vui lòng đăng nhập để xem giỏ hàng.');
         }
     }
+    public function applyCoupon(Request $request)
+    {
+        
+        $couponCode = $request->input('coupon');
+        session(['voucher' => $couponCode ]);
+        $couponData = DB::table('coupons')
+        ->where('code', $couponCode)
+        ->where('is_active', '>', 0)
+        ->first();
+        if ($couponData) {
+            $discount = $couponData->discount;
+        } else {
+            $discount = 0;
+            return redirect()->back()->with('discount', $discount ,'success', 'voucher không hợp lệ');
+        }
+        // dd($discount);
+        return redirect()->back()->with('discount', $discount,'success', 'voucher hợp lệ');
+    }
 }

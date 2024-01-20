@@ -19,7 +19,8 @@ class Invoice extends Model
         'phone',
         'total',
         'status',
-        'user_id'
+        'user_id',
+        'coupon_id',
     ];
 
     public function user()
