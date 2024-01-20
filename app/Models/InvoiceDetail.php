@@ -15,6 +15,7 @@ class InvoiceDetail extends Model
         'id',
         'quantity',
         'unit_price',
+        'unit_price',
         'invoice_id',
         'product_id',
         'combo_id',
@@ -29,6 +30,4 @@ class InvoiceDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
-
 }

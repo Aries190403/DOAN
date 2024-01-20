@@ -33,14 +33,15 @@ class RegisterController extends Controller
             $user = new User();
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
-            $user->email_verified_at=Carbon::now();
+            $user->email_verified_at = Carbon::now();
             $user->email = $request->email;
             $user->fullName = $request->fullName;
             $user->phoneNumber = $request->phoneNumber;
             $user->address = $request->address;
+            $user->status = 1;
             $user->status = 0;
             $user->save();
-            
+
             DB::commit();
             return redirect()->route('login');
         } catch (\Exception $e) {
@@ -50,5 +51,4 @@ class RegisterController extends Controller
             return back()->with('error', TextSystemConst::CREATE_FAILED);
         }
     }
-    
 }

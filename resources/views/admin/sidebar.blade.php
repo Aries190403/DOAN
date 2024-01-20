@@ -1,8 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/admin" class="brand-link">
-        <img src="/template/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-             class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="/template/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Admin System</span>
     </a>
 
@@ -83,6 +82,30 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p> User
+                            <i class="right fas fa-angle-left"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/accounts/add" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/accounts/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-image"></i>
                         <p> Product Image
                             <i class="right fas fa-angle-left"></i>
@@ -94,6 +117,14 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Product Image</p>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/productimages/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <a href="/admin/productimages/add" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Product Image</p>
+                                </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/productimages/list" class="nav-link">

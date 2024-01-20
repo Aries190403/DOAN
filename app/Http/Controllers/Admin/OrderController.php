@@ -19,7 +19,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function detail( $invoiceid)
+    public function detail($invoiceid)
     {
         return view('admin.order.detail', [
             'title' => 'Detail Order',
@@ -33,13 +33,14 @@ class OrderController extends Controller
 
     public function update($invoiceid)
     {
+        // $invoice = Invoice::select('id','status');
         try {
             $invoice = Invoice::findOrFail($invoiceid);
             $invoice->update(['status' => '2']);
 
             Session::flash('success', 'Success Confirm Order');
             return redirect('admin/orders/list');
-        }catch(\Exception $error) {
+        } catch (\Exception $error) {
             Session::flash('error', 'Error Confirm Order');
             return redirect('admin/orders/list');
         }

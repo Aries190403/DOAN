@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ use App\Http\Controllers\prodtestController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OderController;
-
+use App\Http\Controllers\UserController;
 use App\Models\Product;
 
 /*
@@ -40,7 +41,7 @@ use App\Models\Product;
 
 
 
-Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart.add');
+Route::get('/cart/add/{product_id}', [CartController::class, 'addcart'])->name('cart/add');
 Route::get('/cart/delete/{product_id}/{quantity}', [CartController::class, 'deletecart'])->name('cart/delete');
 Route::get('/cart', [CartController::class, 'showUserCart'])->name('cart');
 
@@ -88,6 +89,16 @@ Route::middleware(['auth'])->group(function () {
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
         });
 
+        #user
+        Route::prefix('accounts')->group(function () {
+            Route::get('add', [AuthController::class, 'create']);
+            Route::post('add', [AuthController::class, 'store']);
+            Route::get('list', [AuthController::class, 'list']);
+            Route::get('edit/{id}', [AuthController::class, 'edit']);
+            Route::post('edit/{id}', [AuthController::class, 'update']);
+            Route::DELETE('destroy', [AuthController::class, 'destroy']);
+        });
+
         #product image
         Route::prefix('productimages')->group(function () {
             Route::get('add', [ProductImageController::class, 'create']);
@@ -99,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #slide show
-        Route::prefix('slideshows')->group(function() {
+        Route::prefix('slideshows')->group(function () {
             Route::get('add', [SlideShowController::class, 'create']);
             Route::post('add', [SlideShowController::class, 'store']);
             Route::get('list', [SlideShowController::class, 'list']);
@@ -109,13 +120,13 @@ Route::middleware(['auth'])->group(function () {
         });
 
         #comment
-        Route::prefix('comments')->group(function() {
+        Route::prefix('comments')->group(function () {
             Route::get('list', [CommentController::class, 'list']);
             Route::DELETE('destroy', [CommentController::class, 'destroy']);
         });
 
-        #oder
-        Route::prefix('orders')->group(function() {
+        #order
+        Route::prefix('orders')->group(function () {
             Route::get('list', [OrderController::class, 'index']);
             Route::get('view/{invoices}', [OrderController::class, 'detail']);
             Route::post('view/{invoices}', [OrderController::class, 'update'])->name('update_status');
@@ -126,5 +137,19 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::get('producttype/{id}-{slug}.html', [App\Http\Controllers\ProducttypeController::class, 'index']);
 });
+
+Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+Route::post('product/{id}', [App\Http\Controllers\CommentController::class, 'create']);
+
+Route::prefix('/profile')->group(function () {
+    Route::get('/', [UserController::class, 'profile']);
+    Route::get('/editprofile', [UserController::class, 'editprofile']);
+    Route::post('/editprofile', [UserController::class, 'update']);
+    Route::get('/password', [UserController::class, 'editpassword']);
+    Route::post('/password', [UserController::class, 'updatepassword']);
+});
+
+Route::get('/userorderlist', [UserController::class, 'orderlist']);

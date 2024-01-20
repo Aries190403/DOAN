@@ -7,7 +7,7 @@
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="/template/images/icons/logo-01.png" alt="IMG-LOGO">
                 </a>
 
@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Icon header -->
-                <div class="wrap-icon-header flex-w flex-r-m">
+                <div class="wrap-icon-header flex-w flex-r-m" style="display: contents;">
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                         <i class="zmdi zmdi-search"></i>
                     </div>
@@ -37,18 +37,34 @@
 
                     {{-- sử lý nút login, log out, --}}
                     @guest
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person @if(Request::is('login*')) active @endif">
-                        <a class="nav-link" href="/login">
-                            <i class="zmdi zmdi-account"></i> <!-- Đây là biểu tượng đăng nhập của Font Awesome -->
-                        </a>
+                    <div class="user-dropdown icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person">
+                        <i class="zmdi zmdi-account-o"></i>
+                        <div class="dropdown-content">
+                            <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a>
+                            <a href="/register"><i class="zmdi zmdi-account-add"> Sign up</i></a>
+                            <!-- <a href="#">Link 2</a> -->
+                        </div>
                     </div>
                     @endguest
                     @auth
-                    <a class="nav-item">Hello {{ Auth::user()->fullName }}</a>
-                    <form method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <input type="submit" value="Logout" class="nav-link">
-                    </form>
+                    <div class="user-dropdown icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person">
+                        <i class="zmdi zmdi-account"></i>
+                        <div class="dropdown-content">
+                            <!-- <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a> -->
+                            <!-- <a href="#">Link 2</a> -->
+                            <a href="/profile"><i class="zmdi zmdi-format-list-bulleted"></i>
+                                Your profile</a>
+                            <a href="/userorderlist"><i class="zmdi zmdi-shopping-basket"></i>
+                                Your order</a>
+                            <a>
+
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <input type="submit" class="nav-link" value="Log out">
+                                </form>
+                            </a>
+                        </div>
+                    </div>
                     @endauth
                     {{-- end code --}}
 

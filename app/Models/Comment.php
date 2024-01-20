@@ -12,6 +12,7 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $fillable = [
+
         'date',
         'content',
         'comment_id',
@@ -19,14 +20,12 @@ class Comment extends Model
         'product_id'
     ];
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-
-    public function user()
-    {
-        return $this->belongsTo(Product::class, 'user_id');
-    }
-
 }
