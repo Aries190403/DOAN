@@ -41,7 +41,7 @@ class OrderUserController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            $invoices = Invoice::where('user_id', $user->id)->get();
+            $invoices = Invoice::where('user_id', $user->id)->orderByDesc('id')->get();
 
             return view('auth.listorder', [
                 'title' => 'Your Order List',
@@ -81,6 +81,15 @@ class OrderUserController extends Controller
                     $invoice->status = 0; // Hủy đơn
                 } elseif ($status === 'received') {
                     $invoice->status = 3; // Đã nhận
+
+                    if ($invoice->invoiceDetails) {
+                        foreach ($invoice->invoiceDetails as $invoicedetail) {
+                            // Update the product stock
+                            $product = $invoicedetail->product;
+                            $product->stock -= $invoicedetail->quantity;
+                            $product->save();
+                        }
+                    }
                 }
 
                 $invoice->save();

@@ -43,11 +43,12 @@ class ProductController extends Controller
 
     public function list()
     {
-        $products = Product::with('producttype')->orderByDesc('product_type_id')->paginate(15);
+        $products = Product::with('producttype')->orderByDesc('product_type_id')->paginate(10);
         $deletedProducts = Product::onlyTrashed()->orderByDesc('id')->get();
 
         return view('admin.product.list', [
             'title' => 'List Product',
+            'products' => $products,
             'allProducts' => $products->merge($deletedProducts) //sử dụng hàm merge() để kết hợp cả hai bộ sản phẩm (đã xóa và chưa xóa) thành một bộ duy nhất
         ]);
     }
