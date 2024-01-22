@@ -73,7 +73,7 @@
                             <div class="mb-3">
                                 <div style="color: red; font-weight: bold" class="info__order-box">
                                     <span>Total: </span>
-                                    <span >{{ $sumPriceCart - $pricediscount}}</span>
+                                    <span > {{ number_format($sumPriceCart - $pricediscount, 0, '', '.') }}</span>
                                 </div>
                                 <br>
                                 <form id="voucher" action="{{ route('applycoupon') }}" method="POST">

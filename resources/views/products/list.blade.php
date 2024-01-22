@@ -45,11 +45,9 @@
                             <p>{{ number_format($product->price, 0, ',', ',') }} đ</p><br>
                         </span>
         </a>
-        <form action="{{ route('cart/add', ['product_id' => $product->id]) }}" method="GET" style="display: inline;">
-            <button type="submit">
-                <i class="fas fa-shopping-cart"></i> Add to Cart
-            </button>
-        </form>
+        <a href="cart/add/{{$product->id}}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+            <i class="zmdi zmdi-shopping-cart-plus"></i>
+        </a>
     </div>
 </div>
 </div>

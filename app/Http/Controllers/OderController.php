@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -25,8 +26,11 @@ class OderController extends Controller
             $idvoucher = NULL;
             // Tính tổng giá tiền
             $totalAmount = 0;
+            
             foreach ($productData as $product) {
-                // dd($product);
+                if(Product::find($product->id)->stock < $product->quantity){
+                    return redirect()->back()->with('error', "Sản phẩm $product->name đã hết hàng.");
+                }
                 $totalAmount += $product->price * $product->quantity;
             }
             if($voucher != NULL){
@@ -72,6 +76,9 @@ class OderController extends Controller
                     'product_id' => $product->id,
                     'combo_id' => null,
                 ]);
+                DB::table('products')
+                    ->where('id', $product->id)
+                    ->update(['stock' => DB::raw("stock - $product->quantity")]);
             }
             session()->forget('productsData');
             session()->forget('voucher');

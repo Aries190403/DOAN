@@ -6,6 +6,7 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
@@ -48,15 +49,23 @@ class CartController extends Controller
         else
             $quantity = 1;
         // dd($quantity);
-        // Kiểm tra người dùng đã đăng nhập hay chưa
         if (Auth::check()) {
             $userId = Auth::user()->id;
-            //dd($userId,$productId,$quantity);
 
+            if(Product::find($productId)->stock == 0){
+                return redirect()->back()->with('error', 'Đã hết hàng');
+            }
             // Kiểm tra sản phẩm đã có trong giỏ hàng của người dùng chưa
             $existingCartItem = Cart::where('user_id', $userId)
                                     ->where('product_id', $productId)
                                     ->first();
+        
+            $productStock = Product::find($productId)->stock;
+            // dd($productStock,$existingCartItem->quantity, $quantity);
+            if ($existingCartItem && ($existingCartItem->quantity + $quantity) >= $productStock) {
+                // $quantity = $productStock - $existingCartItem->quantity;
+                return redirect()->back()->with('error', 'Số lượng chỉ được thêm đến mức hiện có trong kho.');
+            }
 
             if ($existingCartItem) {
                 // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
@@ -153,9 +162,10 @@ class CartController extends Controller
             $discount = $couponData->discount;
         } else {
             $discount = 0;
-            return redirect()->back()->with('discount', $discount ,'success', 'voucher không hợp lệ');
+            return redirect()->back()->with('discount', $discount ,'error', 'voucher không hợp lệ');
         }
         // dd($discount);
         return redirect()->back()->with('discount', $discount,'success', 'voucher hợp lệ');
     }
+    
 }
