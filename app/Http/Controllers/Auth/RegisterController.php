@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\Auth\UserRegisterRequest;
 use App\Helpers\admin\TextSystemConst;
 use Carbon\Carbon;
-use Hash;
-use Exception;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
@@ -39,7 +32,6 @@ class RegisterController extends Controller
             $user->phoneNumber = $request->phoneNumber;
             $user->address = $request->address;
             $user->status = 1;
-            $user->status = 0;
             $user->save();
 
             DB::commit();

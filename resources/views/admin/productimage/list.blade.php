@@ -2,6 +2,14 @@
 @extends('admin.main')
 
 @section('content')
+    <div class="search-container">
+        <form action="{{ route('admin.productimages.search') }}" method="GET">
+            <input type="text" name="search" placeholder="Search...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+
     <table class="table">
         <thead>
             <tr>
@@ -13,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($productimages as $productimage)
+            @foreach($allProductimage as $productimage)
             <tr>
                 <td>{{ $productimage->id }}</td>
                 <td class="image-cell"><img src="{{ $productimage->image_path }}" alt="Product Image" style="max-width: 50px; max-height: 50px;"></td>
@@ -39,4 +47,8 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="card-footer clearfix">
+        {!! $productimages->links() !!}
+    </div>
 @endsection

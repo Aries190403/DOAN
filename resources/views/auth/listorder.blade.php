@@ -41,7 +41,7 @@
                         $invoiceid = $invoice->id;
                         @endphp
                         {{-- @dd($invoiceid) --}}
-                        <td>Your Order In: {{ $invoice->invoice_date }}</td>
+                        <td>Your Order In: {{ $invoice->created_at }}</td>
                         <td>{{ number_format($invoice->total, 0, '', '.') }} Đ</td>
                         <td>
                             @if ($invoice->status == 1)

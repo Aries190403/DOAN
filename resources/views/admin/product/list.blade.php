@@ -2,6 +2,13 @@
 @extends('admin.main')
 
 @section('content')
+    <div class="search-container">
+        <form action="{{ route('admin.product.search') }}" method="GET">
+            <input type="text" name="search_product" placeholder="Search...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
     <table class="table">
         <thead>
             <tr>

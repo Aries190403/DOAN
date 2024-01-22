@@ -53,6 +53,25 @@ class ProductController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $products = Product::with('producttype')->orderByDesc('product_type_id')->paginate(10);
+
+        $query = Product::with('producttype')->orderByDesc('product_type_id');
+
+        // Tìm kiếm theo tên sản phẩm
+        if ($request->has('search_product')) {
+            $query->where('name', 'like', '%' . $request->input('search_product') . '%');
+        }
+
+        $allProducts = $query->paginate(10);
+
+        return view('admin.product.list', [
+            'title' => "Search Result For: $request->input('search_product')",
+            'allProducts' => $allProducts,
+            'products' => $products,
+        ]);
+    }
 
     public function edit(Product $product)
     {
