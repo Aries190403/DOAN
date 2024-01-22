@@ -22,9 +22,9 @@ class LoginController extends Controller
             'password' => $request->input('password')
         ], $request->input('remember'))){
             $user = Auth::user();
-            if ($user->isAdmin == 1) {
-                return redirect()->route('admin');
-            }
+            // if ($user->isAdmin == 1) {
+            //     return redirect()->route('admin');
+            // }
             return redirect()->route('home');
             }
             Session()->flash('error', 'Email or Password dont correct');

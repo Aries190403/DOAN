@@ -25,8 +25,6 @@ class ProductController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Eager load mối quan hệ productimages
-        $product->load('productimages');
 
         // Eager load mối quan hệ productimages
         $product->load('productimages');

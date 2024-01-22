@@ -36,7 +36,7 @@
 
                     <div>
                         <a href="/favorites"
-                        class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 tooltip100" 
+                        class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 tooltip100"
                         data-tooltip="Wishlist">
                         <i class="zmdi zmdi-favorite"></i>
                         </a>
@@ -58,14 +58,24 @@
                     <div class="user-dropdown icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-person">
                         <i class="zmdi zmdi-account"></i>
                         <div class="dropdown-content">
-                            <!-- <a href="/login"><i class="zmdi zmdi-account"> Log in</i></a> -->
-                            <!-- <a href="#">Link 2</a> -->
-                            <a href="/profile"><i class="zmdi zmdi-format-list-bulleted"></i>
-                                Your profile</a>
-                            <a href="/userorderlist"><i class="zmdi zmdi-shopping-basket"></i>
-                                Your order</a>
-                            <a>
+                            <!-- Các mục khác -->
+                            <a href="/profile">
+                                <i class="zmdi zmdi-format-list-bulleted"></i>
+                                Your profile
+                            </a>
+                            <a href="/userorderlist">
+                                <i class="zmdi zmdi-shopping-basket"></i>
+                                Your order
+                            </a>
 
+                            @if(Auth::check() && Auth::user()->isAdmin == 1)
+                            <a href="/admin">
+                                <i class="fas fa-user-shield"></i>
+                                Admin Dashboard
+                            </a>
+                            @endif
+
+                            <a>
                                 <form method="post" action="{{ route('logout') }}">
                                     @csrf
                                     <input type="submit" class="nav-link" value="Log out">
@@ -73,6 +83,7 @@
                             </a>
                         </div>
                     </div>
+
                     @endauth
                     {{-- end code --}}
 

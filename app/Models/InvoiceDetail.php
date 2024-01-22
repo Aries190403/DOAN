@@ -30,4 +30,9 @@ class InvoiceDetail extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
 }

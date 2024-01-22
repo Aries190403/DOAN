@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="carts">
-        @php $total = 0; @endphp
         <table class="table">
             <tbody>
             <tr class="table_head">
@@ -16,7 +15,6 @@
             @foreach($invoicedetails as $key => $invoicedetail)
                 @php
                     $price = $invoicedetail->unit_price * $invoicedetail->quantity;
-                    $total += $price;
 
                     $detailid = null;
                 @endphp
@@ -36,9 +34,13 @@
                     <td class="column-5">{{ number_format($price, 0, '', '.') }}</td>
                 </tr>
             @endforeach
+                {{-- <tr>
+                    <td colspan="4" class="text-right">Coupon:</td>
+                    <td>{{ number_format($invoice->coupon->discount, 0, '', '.') }}%</td>
+                </tr> --}}
                 <tr>
                     <td colspan="4" class="text-right">Total price:</td>
-                    <td>{{ number_format($total, 0, '', '.') }}</td>
+                    <td>{{ number_format($invoicedetail->invoice->total, 0, '', '.') }}</td>
                 </tr>
             </tbody>
         </table>

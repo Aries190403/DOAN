@@ -74,10 +74,8 @@ class MainController extends Controller
         $result = $this->product->get($page);
 
         if (count($result) != 0) {
-            $html = view(
-                'products.list',
-                ['products' => $result]
-            )->render();
+            $html = view('products.list',
+            ['products' => $result])->render();
 
             return response()->json(['html' => $html]);
         }

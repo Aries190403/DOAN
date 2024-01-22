@@ -53,6 +53,8 @@ class FavoriteController extends Controller
     {
         $favorites = Session::get('favorites', []);
         // dd($favorites);
-        return view('favorites', ['favorites' => $favorites],['title'=>'checkout']);
+        return view('favorites', [
+            'favorites' => $favorites],
+            ['title'=>'Wish List']);
     }
 }

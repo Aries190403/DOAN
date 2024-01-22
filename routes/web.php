@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\CouponController;
 
+
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\OderController;
 use App\Http\Controllers\OrderUserController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
+use App\Models\ProductImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +65,15 @@ Route::get('/register', [RegisterController::class, 'showregister'])->name('regi
 Route::post('/register', [RegisterController::class, 'postregister'])->name('register');
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/products/{product}', [MainController::class, 'show'])->name('product-show');
+
+#load more product
+Route::post('/services/load-product', [MainController::class, 'loadProduct']);
+
+#product detail
 Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+
+#product producttype
+Route::get('producttype/{id}-{slug}.html', [App\Http\Controllers\ProducttypeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
 
@@ -87,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
             Route::get('list', [ProductController::class, 'list']);
+            Route::get('search', [ProductController::class, 'search'])->name('admin.product.search');
             Route::get('edit/{product}', [ProductController::class, 'edit']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
@@ -107,6 +117,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [ProductImageController::class, 'create']);
             Route::post('add', [ProductImageController::class, 'store']);
             Route::get('list', [ProductImageController::class, 'list']);
+            Route::get('search', [ProductImageController::class, 'search'])->name('admin.productimages.search');
             Route::get('edit/{productimage}', [ProductImageController::class, 'edit']);
             Route::post('edit/{productimage}', [ProductImageController::class, 'update']);
             Route::DELETE('destroy', [ProductImageController::class, 'destroy']);
@@ -151,10 +162,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('producttype/{id}-{slug}.html', [App\Http\Controllers\ProducttypeController::class, 'index']);
+
 });
 
-Route::get('product/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+
 Route::post('product/{id}', [App\Http\Controllers\CommentController::class, 'create']);
 
 Route::prefix('/profile')->group(function () {
@@ -165,6 +176,9 @@ Route::prefix('/profile')->group(function () {
     Route::post('/password', [UserController::class, 'updatepassword']);
 });
 
-Route::get('/userorderlist', [OrderUserController::class, 'list']);
-Route::get('/userorderlist/{invoice}', [OrderUserController::class, 'vieworder']);
-Route::post('/userorderlist/{invoice}', [OrderUserController::class, 'updateStatus'] )->name('update.status');
+#order user
+Route::prefix('/userorderlist')->group(function () {
+    Route::get('/', [OrderUserController::class, 'list']);
+    Route::get('/{invoice}', [OrderUserController::class, 'vieworder']);
+    Route::post('/{invoice}', [OrderUserController::class, 'updateStatus'])->name('update.status');
+});
